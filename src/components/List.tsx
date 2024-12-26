@@ -19,7 +19,7 @@ export default function List({
       {...props}
       onClick={onClick}
       className={cn(
-        "py-2 px-5 my-2 w-full list-none ",
+        "py-2 px-5 my-2 w-full list-none cursor-pointer",
         className
       )}
     >
