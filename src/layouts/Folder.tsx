@@ -17,6 +17,7 @@ export default function NoteList({
   // filter notes for folder
   const filteredNote = notes.filter((note) => note.folder === noteFolder);
   const [isTablet, setisTablet] = useState(false);
+  
 
   useEffect(() => {
     const screenSizeUpdate = () => {

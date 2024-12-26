@@ -1,19 +1,21 @@
-'use client'
+"use client";
 import Button from "@/components/Button";
 import Icon from "@/components/Icon";
 import List from "@/components/List";
 import { folders, notes } from "@/data/data";
 import cn from "@/utility/cn";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 interface NavProps {
+  activeFolder: string;
   setFolder: React.Dispatch<React.SetStateAction<string>>;
   activeLayout: number;
   setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
 }
 export default function Nav({
+  activeFolder,
   setFolder,
   activeLayout,
   setActiveLayout,
@@ -24,6 +26,8 @@ export default function Nav({
   };
 
   const router = useRouter();
+  const pathname = usePathname();
+
   return (
     <section
       className={cn(" hidden basis-full md:basis-1/3 lg:block lg:basis-[20%]", {
@@ -66,12 +70,17 @@ export default function Nav({
       <nav className="my-6">
         <p className="text-white opacity-60 text-sm pl-5 mb-2">Recents</p>
         <ul>
-          {notes.slice(0,2).map((note) => (
+          {notes.slice(0, 2).map((note) => (
             <List
               key={note.id}
               label={note.title}
               icon={<Icon src={"/file_small.png"} />}
               onClick={() => router.push(note.id)}
+              className={
+                pathname.includes(note.id)
+                  ? "bg-orange-500"
+                  : " hover:bg-white hover:bg-opacity-5"
+              }
             />
           ))}
         </ul>
@@ -95,6 +104,11 @@ export default function Nav({
               key={key}
               label={folder}
               icon={<Icon src={"/folder.png"} />}
+              className={
+                folder === activeFolder
+                  ? "bg-white bg-opacity-5"
+                  : " hover:bg-white hover:bg-opacity-5"
+              }
             />
           ))}
         </ul>

@@ -13,6 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="flex">
       <Nav
         key={1}
+        activeFolder={folder}
         setFolder={setfolder}
         activeLayout={activeLayout}
         setActiveLayout={setActiveLayout}
