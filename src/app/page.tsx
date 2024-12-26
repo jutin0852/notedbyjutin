@@ -1,11 +1,5 @@
-import Folders from "@/layouts/Folders";
-import Nav from "@/layouts/Nav";
+import Link from "next/link";
 
 export default function Home() {
-  return (
-    <div className="flex">
-      <Nav />
-      <Folders />
-    </div>
-  );
+  return <Link href={"/note"}>Notes</Link>;
 }

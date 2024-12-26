@@ -1,11 +1,35 @@
+'use client'
 import Button from "@/components/Button";
+import Icon from "@/components/Icon";
 import List from "@/components/List";
+import { folders, notes } from "@/data/data";
+import cn from "@/utility/cn";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
-export default function Nav() {
+interface NavProps {
+  setFolder: React.Dispatch<React.SetStateAction<string>>;
+  activeLayout: number;
+  setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
+}
+export default function Nav({
+  setFolder,
+  activeLayout,
+  setActiveLayout,
+}: NavProps) {
+  const handleFolderClick = (folder: string) => {
+    setActiveLayout(2);
+    setFolder(folder);
+  };
+
+  const router = useRouter();
   return (
-    <section className=" w-[300px]">
+    <section
+      className={cn(" hidden basis-full md:basis-1/3 lg:block lg:basis-[20%]", {
+        block: activeLayout == 1,
+      })}
+    >
       <header className="p-5">
         <section className="flex justify-between mb-6">
           <div className="text-white">
@@ -42,29 +66,46 @@ export default function Nav() {
       <nav className="my-6">
         <p className="text-white opacity-60 text-sm pl-5 mb-2">Recents</p>
         <ul>
-          <List>Reflection on the Month of June</List>
-          <List>Reflection on the Month of June</List>
-          <List>Reflection on the Month of June</List>
+          {notes.slice(0,2).map((note) => (
+            <List
+              key={note.id}
+              label={note.title}
+              icon={<Icon src={"/file_small.png"} />}
+              onClick={() => router.push(note.id)}
+            />
+          ))}
         </ul>
       </nav>
       {/* folders */}
       <nav className="my-6">
-        <p className="text-white opacity-60 text-sm pl-5 mb-2">Folders</p>
+        <header className="flex justify-between">
+          <p className="text-white opacity-60 text-sm pl-5 mb-2">Folders</p>
+          <Image
+            src={"/icons/add_folder.png"}
+            className="h-5 mr-5"
+            alt="add_folder"
+            width={20}
+            height={20}
+          />
+        </header>
         <ul>
-          <List folder>Reflection on the Month of June</List>
-          <List folder>Reflection on the Month of June</List>
-          <List folder>Reflection on the Month of June</List>
-          <List folder>Reflection on the Month of June</List>
-          <List folder>Reflection on the Month of June</List>
+          {folders.map((folder, key) => (
+            <List
+              onClick={() => handleFolderClick(folder)}
+              key={key}
+              label={folder}
+              icon={<Icon src={"/folder.png"} />}
+            />
+          ))}
         </ul>
       </nav>
       {/* more */}
       <nav>
         <p className="text-white opacity-60 text-sm pl-5 mb-2">More</p>
         <ul>
-          <List custom="/favorite.png">Favorite</List>
-          <List custom="/trash.png">Trash</List>
-          <List custom="/archieve.png">Archived Notes</List>
+          <List icon={<Icon src={"/favorite.png"} />} label="Favorite" />
+          <List icon={<Icon src={"/trash.png"} />} label="Trash" />
+          <List icon={<Icon src={"/archieve.png"} />} label="archieve" />
         </ul>
       </nav>
     </section>
