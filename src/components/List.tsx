@@ -29,10 +29,10 @@ export default function List({
     >
       <span>
         {icon}
-        <span className="text-sm text-white">{label}</span>
+        <span className="text-sm ml-2 text-white">{label}</span>
       </span>
 
-      <span>
+      <span className="flex gap-2">
         {icon2}
         {icon3}
       </span>

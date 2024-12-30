@@ -3,7 +3,8 @@ import Folders from "@/app/note/nav/molecules/Folders";
 import Button from "@/components/Button";
 import Icon from "@/components/Icon";
 import List from "@/components/List";
-import { notes } from "@/data/data";
+import { Note } from "@/data/data";
+import Plus from "@/style/icons/plus";
 import cn from "@/utility/cn";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -14,16 +15,35 @@ interface NavProps {
   setActiveFolder: React.Dispatch<React.SetStateAction<string>>;
   activeLayout: number;
   setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
+  notes: Note[];
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
 }
+
+let noteId = 5;
 
 export default function Nav({
   activeFolder,
   setActiveFolder,
   activeLayout,
   setActiveLayout,
+  notes,
+  setNotes,
 }: NavProps) {
   const router = useRouter();
   const pathname = usePathname();
+
+  const handleAddPage = () => {
+    const newNote = [
+      {
+        id: noteId++,
+        title: "New note",
+        body: "",
+        folder: "",
+      },
+      ...notes,
+    ];
+    setNotes(newNote);
+  };
 
   return (
     <section
@@ -52,8 +72,8 @@ export default function Nav({
           /> */}
         </section>
 
-        <Button>
-          <Icon src={"/add.png"} className="self-center " />
+        <Button onClick={() => handleAddPage()}>
+          <Plus />
           <span className="ml-1">New Note</span>
         </Button>
       </header>
@@ -61,14 +81,14 @@ export default function Nav({
       <nav className="my-6">
         <p className="text-white opacity-60 text-sm pl-5 mb-2">Recents</p>
         <ul>
-          {notes.slice(0, 2).map((note) => (
+          {notes.slice(0, 5).map((note) => (
             <List
               key={note.id}
               label={note.title}
               icon={<Icon src={"/file_small.png"} />}
-              onClick={() => router.push(note.id)}
+              onClick={() => router.push(note.id.toString())}
               className={
-                pathname.includes(note.id)
+                pathname.includes(note.id.toString())
                   ? "bg-orange-500"
                   : " hover:bg-white hover:bg-opacity-5"
               }
@@ -81,6 +101,7 @@ export default function Nav({
         activeFolder={activeFolder}
         setActiveFolder={setActiveFolder}
         setActiveLayout={setActiveLayout}
+        notes={notes}
       />
       {/* more */}
       <nav>

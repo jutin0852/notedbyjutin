@@ -1,8 +1,15 @@
 import React from "react";
 
-export default function Button({ children }: { children: React.ReactNode }) {
+type ButtonProps = {
+  children: React.ReactNode;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+export default function Button({ children, onClick }: ButtonProps) {
   return (
-    <button className="flex justify-center p-2 w-full bg-white bg-opacity-5 text-white text-sm">
+    <button
+      onClick={onClick}
+      className="flex justify-center p-2 w-full bg-white bg-opacity-5 text-white text-sm"
+    >
       {children}
     </button>
   );

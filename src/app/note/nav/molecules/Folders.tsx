@@ -1,7 +1,11 @@
 import Icon from "@/components/Icon";
 import List from "@/components/List";
-import { Folder, initialFolders, notes } from "@/data/data";
-import { useState } from "react";
+import { Folder, initialFolders, Note } from "@/data/data";
+import React, { useState } from "react";
+import Edit from "@/style/icons/Edit";
+import Tick from "@/style/icons/tick";
+import Trash from "@/style/icons/trash";
+import FolderIcon from "@/style/icons/folderIcon";
 
 let nextId = 3;
 
@@ -9,10 +13,12 @@ export default function Folders({
   activeFolder,
   setActiveFolder,
   setActiveLayout,
+  notes,
 }: {
   activeFolder: string;
   setActiveFolder: React.Dispatch<React.SetStateAction<string>>;
   setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
+  notes: Note[];
 }) {
   const [folders, setFolders] = useState<Folder[]>(initialFolders);
 
@@ -20,6 +26,7 @@ export default function Folders({
     setActiveLayout(2);
     setActiveFolder(folder);
   };
+
   const handleAddFolder = () => {
     const existingFolder = folders.find(
       (folder) => folder.title === "New folder"
@@ -65,7 +72,10 @@ export default function Folders({
     setFolders(newFolder);
   };
 
-  const handleEditFolder = (e, id: number) => {
+  const handleEditFolder = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: number
+  ) => {
     const newFolder = folders.map((folder) => {
       if (folder.id === id) {
         return {
@@ -95,20 +105,24 @@ export default function Folders({
             return (
               <div
                 key={key}
-                className="w-full px-5 flex justify-between my-2 bg-white bg-opacity-5"
+                className="w-full px-5 py-2 flex justify-between my-2 bg-white bg-opacity-5"
               >
-                <Icon src={"/folder.png"} />
-                <input
-                  type="text"
-                  autoFocus
-                  className="bg-transparent text-white h-5 self-center placeholder:text-white placeholder:text-sm  "
-                  value={folder.title}
-                  onChange={(e) => handleEditFolder(e, folder.id)}
-                />
-                <Icon
-                  src={"/folder.png"}
-                  onClick={() => handleSaveFolder(folder.id, folder.title)}
-                />
+                <span>
+                  <FolderIcon />
+                  <input
+                    type="text"
+                    autoFocus
+                    className="bg-transparent text-white h-5 self-center placeholder:text-white placeholder:text-sm  "
+                    value={folder.title}
+                    onChange={(e) => handleEditFolder(e, folder.id)}
+                  />
+                </span>
+
+                <span>
+                  <Tick
+                    onClick={() => handleSaveFolder(folder.id, folder.title)}
+                  />
+                </span>
               </div>
             );
           } else {
@@ -117,20 +131,12 @@ export default function Folders({
                 onClick={() => handleFolderClick(folder.title)}
                 key={key}
                 label={folder.title}
-                icon={<Icon src={"/folder.png"} />}
-                icon2={
-                  <Icon
-                    src={"/folder.png"}
-                    onClick={() => handleEditActive(folder.id)}
-                  />
-                }
+                icon={<FolderIcon />}
+                icon2={<Edit onClick={() => handleEditActive(folder.id)} />}
                 icon3={
-                  notes.filter((note) => note.folder === folder.title)
+                  notes.filter((note: Note) => note.folder === folder.title)
                     .length === 0 && (
-                    <Icon
-                      src={"/folder.png"}
-                      onClick={() => handleDeleteFolder(folder.id)}
-                    />
+                    <Trash onClick={() => handleDeleteFolder(folder.id)} />
                   )
                 }
                 className={

@@ -1,5 +1,5 @@
 import Card from "@/components/Card";
-import { notes } from "@/data/data";
+import { Note } from "@/data/data";
 import cn from "@/utility/cn";
 import React, { useEffect, useState } from "react";
 
@@ -7,17 +7,18 @@ interface NoteList {
   noteFolder: string;
   activeLayout: number;
   setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
+  notes: Note[];
 }
 
 export default function NoteList({
   noteFolder,
   activeLayout,
   setActiveLayout,
+  notes,
 }: NoteList) {
   // filter notes for folder
   const filteredNote = notes.filter((note) => note.folder === noteFolder);
   const [isTablet, setisTablet] = useState(false);
-  
 
   useEffect(() => {
     const screenSizeUpdate = () => {
