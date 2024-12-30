@@ -1,5 +1,6 @@
 "use client";
 import Icon from "@/components/Icon";
+import Tiptap from "@/components/tiptap";
 import { notes } from "@/data/data";
 import cn from "@/utility/cn";
 import React, { useEffect, useState } from "react";
@@ -13,6 +14,9 @@ export default function EditPage({ params }: EditPageProps) {
   const [font, setFont] = useState<number>(16);
   const [isClient, setIsClient] = useState<boolean>(false);
   const note = notes.find((note) => note.id === params);
+  const [bold, setBold] = useState(false);
+
+  const onBoldToggle = () => setBold((prev) => !prev);
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -67,42 +71,8 @@ export default function EditPage({ params }: EditPageProps) {
           </div>
           <p className="text-opacity-10">Personal</p>
         </div>
-
-        <div className="flex gap-3 py-3 border-y border-white border-opacity-10 ">
-          <p>paragraph</p>
-          <p>
-            <span onClick={increaseFont} >16</span>{" "}
-            <Icon src="/icons/down.png" onClick={decreaseFont} />
-          </p>
-          <p>
-            <Icon
-              src="/icons/bold.png"
-              onClick={() => applyToSelection("fontWeight", "bolder")}
-            />
-            <Icon
-              src="/icons/italics.png"
-              onClick={() => applyToSelection("fontStyle", "italic")}
-            />
-            <Icon
-              src="/icons/underline.png"
-              onClick={() => applyToSelection("textDecoration", "underline")}
-            />
-          </p>
-          <p>
-            <Icon src="/icons/image.png" className="mr-2" />
-            <Icon src="/icons/link.png" />
-          </p>
-          <p>
-            <Icon src="/icons/table.png" />
-          </p>
-        </div>
+        <Tiptap note={note} />
       </section>
-
-      <article
-        contentEditable
-        style={{ fontSize: `${font}px` }}
-        className={cn(`pt-5 outline-none `)}
-      ></article>
     </>
   );
 }

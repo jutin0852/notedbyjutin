@@ -1,8 +1,9 @@
 "use client";
+import Folders from "@/app/note/nav/molecules/Folders";
 import Button from "@/components/Button";
 import Icon from "@/components/Icon";
 import List from "@/components/List";
-import { folders, notes } from "@/data/data";
+import { notes } from "@/data/data";
 import cn from "@/utility/cn";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -10,21 +11,17 @@ import React from "react";
 
 interface NavProps {
   activeFolder: string;
-  setFolder: React.Dispatch<React.SetStateAction<string>>;
+  setActiveFolder: React.Dispatch<React.SetStateAction<string>>;
   activeLayout: number;
   setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
 }
+
 export default function Nav({
   activeFolder,
-  setFolder,
+  setActiveFolder,
   activeLayout,
   setActiveLayout,
 }: NavProps) {
-  const handleFolderClick = (folder: string) => {
-    setActiveLayout(2);
-    setFolder(folder);
-  };
-
   const router = useRouter();
   const pathname = usePathname();
 
@@ -56,13 +53,7 @@ export default function Nav({
         </section>
 
         <Button>
-          <Image
-            src={"/add.png"}
-            className="self-center "
-            alt="add"
-            width={20}
-            height={20}
-          />
+          <Icon src={"/add.png"} className="self-center " />
           <span className="ml-1">New Note</span>
         </Button>
       </header>
@@ -86,33 +77,11 @@ export default function Nav({
         </ul>
       </nav>
       {/* folders */}
-      <nav className="my-6">
-        <header className="flex justify-between">
-          <p className="text-white opacity-60 text-sm pl-5 mb-2">Folders</p>
-          <Image
-            src={"/icons/add_folder.png"}
-            className="h-5 mr-5"
-            alt="add_folder"
-            width={20}
-            height={20}
-          />
-        </header>
-        <ul>
-          {folders.map((folder, key) => (
-            <List
-              onClick={() => handleFolderClick(folder)}
-              key={key}
-              label={folder}
-              icon={<Icon src={"/folder.png"} />}
-              className={
-                folder === activeFolder
-                  ? "bg-white bg-opacity-5"
-                  : " hover:bg-white hover:bg-opacity-5"
-              }
-            />
-          ))}
-        </ul>
-      </nav>
+      <Folders
+        activeFolder={activeFolder}
+        setActiveFolder={setActiveFolder}
+        setActiveLayout={setActiveLayout}
+      />
       {/* more */}
       <nav>
         <p className="text-white opacity-60 text-sm pl-5 mb-2">More</p>

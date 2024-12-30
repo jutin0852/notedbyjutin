@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Nav
         key={1}
         activeFolder={folder}
-        setFolder={setfolder}
+        setActiveFolder={setfolder}
         activeLayout={activeLayout}
         setActiveLayout={setActiveLayout}
       />

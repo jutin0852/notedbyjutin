@@ -4,7 +4,16 @@ export interface Note {
   body: string;
   folder: string;
 }
-export const folders = ["personal", "friends"];
+export interface Folder {
+  isEditing: boolean;
+  title: string;
+  id: number;
+}
+
+export const initialFolders: Folder[] = [
+  { isEditing: false, title: "personal", id: 1 },
+  { isEditing: false, title: "friends", id: 2 },
+];
 
 export const notes: Note[] = [
   {

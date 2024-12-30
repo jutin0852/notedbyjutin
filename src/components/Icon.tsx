@@ -11,13 +11,15 @@ export default function Icon({
   onClick?: () => void;
 }) {
   return (
-    <Image
-      className={`${className} inline mr-2`}
-      src={src}
-      alt={src}
-      height={20}
-      width={20}
-      onClick={onClick}
-    />
+    <span className={`  p-1.5 mr-2 ${className}`}>
+      <Image
+        className={`inline`}
+        src={src}
+        alt={src}
+        height={20}
+        width={20}
+        onClick={onClick}
+      />
+    </span>
   );
 }
