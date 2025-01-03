@@ -1,47 +1,48 @@
 "use client";
 import Icon from "@/components/Icon";
 import Tiptap from "@/components/tiptap";
-import { notes } from "@/data/data";
-import cn from "@/utility/cn";
-import React, { useEffect, useState } from "react";
+import { useNoteContext } from "@/context/NoteContext";
+import { Note } from "@/data/data";
+import React from "react";
 
 interface EditPageProps {
   params: string;
 }
-type TextStyle = "fontWeight" | "fontStyle" | "textDecoration";
+// type TextStyle = "fontWeight" | "fontStyle" | "textDecoration";
 
 export default function EditPage({ params }: EditPageProps) {
-  const [font, setFont] = useState<number>(16);
-  const [isClient, setIsClient] = useState<boolean>(false);
-  const note = notes.find((note) => note.id === params);
-  const [bold, setBold] = useState(false);
+  const { notes, setNotes } = useNoteContext();
+  // const [font, setFont] = useState<number>(16);
+  // const [isClient, setIsClient] = useState<boolean>(false);
+  const note = notes?.find((note: Note) => note.id.toString() === params);
+  // const [bold, setBold] = useState(false);
 
-  const onBoldToggle = () => setBold((prev) => !prev);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  // const onBoldToggle = () => setBold((prev) => !prev);
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
 
-  if (!isClient) return;
-  // increase and decrease font
-  const increaseFont = () => setFont((prev) => prev + 2);
-  const decreaseFont = () => setFont((prev) => Math.max(10, prev - 2));
+  // if (!isClient) return;
+  // // increase and decrease font
+  // const increaseFont = () => setFont((prev) => prev + 2);
+  // const decreaseFont = () => setFont((prev) => Math.max(10, prev - 2));
 
-  const applyToSelection = (style: TextStyle, value: string) => {
-    const selection = window.getSelection();
+  // const applyToSelection = (style: TextStyle, value: string) => {
+  //   const selection = window.getSelection();
 
-    if (selection && selection.rangeCount > 0) {
-      const range = selection.getRangeAt(0);
-      console.log(range);
-      const span = document.createElement("span");
+  //   if (selection && selection.rangeCount > 0) {
+  //     const range = selection.getRangeAt(0);
+  //     console.log(range);
+  //     const span = document.createElement("span");
 
-      // add style to the span
-      span.style[style] = value;
-      span.append(range.extractContents());
-      range.insertNode(span);
-    }
-    // clear selection
-    selection?.removeAllRanges();
-  };
+  //     // add style to the span
+  //     span.style[style] = value;
+  //     span.append(range.extractContents());
+  //     range.insertNode(span);
+  //   }
+  //   // clear selection
+  //   selection?.removeAllRanges();
+  // };
 
   return (
     <>

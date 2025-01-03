@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Source_Sans_3 } from "next/font/google";
+import { sourcesSans3 } from "@/style/icons/fonts";
 
-const sourcesSans3 = Source_Sans_3({
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Noted",
@@ -18,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={sourcesSans3.className}>
+    <html lang="en" className={`${sourcesSans3.className} antialiased`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
