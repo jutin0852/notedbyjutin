@@ -2,10 +2,10 @@ import Icon from "@/components/Icon";
 import List from "@/components/List";
 import { Folder, initialFolders, Note } from "@/data/data";
 import React, { useState } from "react";
-import Edit from "@/style/icons/Edit";
 import Tick from "@/style/icons/tick";
-import Trash from "@/style/icons/trash";
 import FolderIcon from "@/style/icons/folderIcon";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import { PencilSquareIcon } from "@heroicons/react/24/solid";
 
 let nextId = 3;
 
@@ -130,21 +130,31 @@ export default function Folders({
               <List
                 onClick={() => handleFolderClick(folder.title)}
                 key={key}
-                label={folder.title}
-                icon={<FolderIcon />}
-                icon2={<Edit onClick={() => handleEditActive(folder.id)} />}
-                icon3={
-                  notes.filter((note: Note) => note.folder === folder.title)
-                    .length === 0 && (
-                    <Trash onClick={() => handleDeleteFolder(folder.id)} />
-                  )
-                }
                 className={
                   folder.title === activeFolder
                     ? "bg-white bg-opacity-5"
                     : " hover:bg-white hover:bg-opacity-5"
                 }
-              />
+              >
+                {" "}
+                <span>
+                  <FolderIcon />
+                  <span className="text-sm ml-2 text-white">
+                    {folder.title}
+                  </span>
+                </span>
+                <span className="flex gap-2">
+                  {
+                    <PencilSquareIcon
+                      onClick={() => handleEditActive(folder.id)}
+                    />
+                  }
+                  {notes.filter((note: Note) => note.folder === folder.title)
+                    .length === 0 && (
+                    <TrashIcon onClick={() => handleDeleteFolder(folder.id)} />
+                  )}
+                </span>
+              </List>
             );
           }
         })}

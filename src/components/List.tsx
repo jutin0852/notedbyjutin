@@ -2,22 +2,11 @@ import cn from "@/utility/cn";
 import React from "react";
 
 type List = {
-  icon: React.ReactNode;
-  icon2?: React.ReactNode;
-  icon3?: React.ReactNode;
   onClick?: () => void;
-  label: string;
+  children: React.ReactNode;
 } & React.LiHTMLAttributes<HTMLLIElement>;
 
-export default function List({
-  icon,
-  icon2,
-  icon3,
-  label,
-  onClick,
-  className,
-  ...props
-}: List) {
+export default function List({ onClick, children, className, ...props }: List) {
   return (
     <li
       {...props}
@@ -27,15 +16,7 @@ export default function List({
         className
       )}
     >
-      <span>
-        {icon}
-        <span className="text-sm ml-2 text-white">{label}</span>
-      </span>
-
-      <span className="flex gap-2">
-        {icon2}
-        {icon3}
-      </span>
+      {children}
     </li>
   );
 }

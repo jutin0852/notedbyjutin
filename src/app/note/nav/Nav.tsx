@@ -1,11 +1,12 @@
 "use client";
 import Folders from "@/app/note/nav/molecules/Folders";
 import Button from "@/components/Button";
-import Icon from "@/components/Icon";
 import List from "@/components/List";
 import { Note } from "@/data/data";
 import Plus from "@/style/icons/plus";
 import cn from "@/utility/cn";
+import { ArchiveBoxIcon, DocumentTextIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
@@ -31,6 +32,7 @@ export default function Nav({
 }: NavProps) {
   const router = useRouter();
   const pathname = usePathname();
+  
 
   const handleAddPage = () => {
     const newNote = [
@@ -84,15 +86,18 @@ export default function Nav({
           {notes.slice(0, 5).map((note) => (
             <List
               key={note.id}
-              label={note.title}
-              icon={<Icon src={"/file_small.png"} />}
               onClick={() => router.push(note.id.toString())}
               className={
                 pathname.includes(note.id.toString())
                   ? "bg-orange-500"
                   : " hover:bg-white hover:bg-opacity-5"
               }
-            />
+            >
+              <span>
+                <DocumentTextIcon className="size-6 text-white inline-block"/>
+                <span className="text-sm ml-2 text-white">{note.title}</span>
+              </span>
+            </List>
           ))}
         </ul>
       </nav>
@@ -107,11 +112,25 @@ export default function Nav({
       <nav>
         <p className="text-white opacity-60 text-sm pl-5 mb-2">More</p>
         <ul>
-          <List icon={<Icon src={"/favorite.png"} />} label="Favorite" />
-          <List icon={<Icon src={"/trash.png"} />} label="Trash" />
-          <List icon={<Icon src={"/archieve.png"} />} label="archieve" />
+          {moreFolders.map((folder, key) => {
+            const Icon = folder.icon;
+            return (
+              <List key={key}>
+                <span>
+                  <Icon className="size-6 text-white inline-block" />
+                  <span className="text-sm ml-2 text-white">{folder.name}</span>
+                </span>
+              </List>
+            );
+          })}
         </ul>
       </nav>
     </section>
   );
 }
+
+const moreFolders = [
+  { name: "Favourite", icon: StarIcon, href: "" },
+  { name: "Trash", icon: TrashIcon, href: "" },
+  { name: "archieve", icon: ArchiveBoxIcon, href: "" },
+];

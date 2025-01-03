@@ -15,6 +15,8 @@ export const initialFolders: Folder[] = [
   { isEditing: false, title: "friends", id: 2 },
 ];
 
+
+
 export const InitialNotes: Note[] = [
   {
     id: 1,
