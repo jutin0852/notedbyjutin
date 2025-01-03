@@ -32,7 +32,6 @@ export default function Nav({
 }: NavProps) {
   const router = useRouter();
   const pathname = usePathname();
-  
 
   const handleAddPage = () => {
     const newNote = [
