@@ -10,11 +10,16 @@ interface CardProps {
 }
 
 export default function Card({ note, onClick }: CardProps) {
-  const pathname = usePathname()
-  const className = pathname.includes(note.id) && 'bg-opacity-10'
+  const pathname = usePathname();
+  const className = pathname.includes(note.id.toString()) && "bg-opacity-10";
   return (
-    <Link href={`/note/${note.id}`} onClick={onClick}>
-      <div className={cn("bg-white mt-4 text-white bg-opacity-5 p-4 w-full rounded hover:bg-opacity-10",className)}>
+    <Link href={`/note/${note.id.toString()}`} onClick={onClick}>
+      <div
+        className={cn(
+          "bg-white mt-4 text-white bg-opacity-5 p-4 w-full rounded hover:bg-opacity-10",
+          className
+        )}
+      >
         <p className="text-sm">{note.title}</p>
         <span className="text-xs mr-2">11/2/2023</span>
         <span className=" truncate whitespace-normal text-xs">{note.body}</span>
