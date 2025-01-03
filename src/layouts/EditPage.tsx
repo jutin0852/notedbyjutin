@@ -11,7 +11,7 @@ interface EditPageProps {
 // type TextStyle = "fontWeight" | "fontStyle" | "textDecoration";
 
 export default function EditPage({ params }: EditPageProps) {
-  const { notes, setNotes } = useNoteContext();
+  const { notes } = useNoteContext();
   // const [font, setFont] = useState<number>(16);
   // const [isClient, setIsClient] = useState<boolean>(false);
   const note = notes?.find((note: Note) => note.id.toString() === params);
