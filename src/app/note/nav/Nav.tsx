@@ -85,7 +85,7 @@ export default function Nav({
           {notes.slice(0, 5).map((note) => (
             <List
               key={note.id}
-              onClick={() => router.push(note.id.toString())}
+              onClick={() => router.push(`/note/${note.id.toString()}`)}
               className={
                 pathname.includes(note.id.toString())
                   ? "bg-orange-500"
