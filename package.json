@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@eslint/object-schema": "^2.1.5",
     "@heroicons/react": "^2.2.0",
     "@svgr/webpack": "^8.1.0",
     "@tiptap/pm": "^2.10.4",
