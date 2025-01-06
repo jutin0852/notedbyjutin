@@ -1,26 +1,34 @@
 import { Folder, Note } from "./definitions";
 
 export const initialFolders: Folder[] = [
-  { isEditing: false, title: "personal", id: 1 },
-  { isEditing: false, title: "friends", id: 2 },
+  { isEditing: false, title: "personal", id: "4" },
+  { isEditing: false, title: "friends", id: "5" },
 ];
-
-
 
 export const InitialNotes: Note[] = [
   {
-    id: 1,
+    id: "1",
     title: "whats my life",
     body: "my life is good",
-    folderName: "personal",
+    folderId: "4",
   },
-  { id: 2, title: "chinwe", body: "my life is good", folderName: "friends" },
+  {
+    id: "2",
+    title: "chinwe",
+    body: "my life is good",
+    folderId: "5",
+  },
 
   {
-    id: 3,
+    id: "9",
     title: "is it good",
     body: "good is goood yess",
-    folderName: "personal",
+    folderId: "4",
   },
-  { id: 4, title: "olise", body: "good is goood yess", folderName: "friends" },
+  {
+    id: "6",
+    title: "olise",
+    body: "good is goood yess",
+    folderId: "5",
+  },
 ];

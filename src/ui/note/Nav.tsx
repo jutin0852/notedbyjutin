@@ -1,4 +1,5 @@
 "use client";
+import { v4 as uuidv4 } from "uuid";
 import Folders from "@/ui/note/Folders";
 import Button from "@/ui/components/Button";
 import List from "@/ui/components/List";
@@ -14,40 +15,43 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { useNoteContext } from "@/context/NoteContext";
+import { Folder } from "@/lib/definitions";
 
 interface NavProps {
+  folders: Folder[];
+  setFolders: React.Dispatch<React.SetStateAction<Folder[]>>;
   activeFolder: string;
   setActiveFolder: React.Dispatch<React.SetStateAction<string>>;
   activeLayout: number;
   setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
-  // notes: Note[];
   // setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
 }
 
-let noteId = 5;
+// let noteId = 5;
 
 export default function Nav({
   activeFolder,
   setActiveFolder,
   activeLayout,
   setActiveLayout,
+  folders,
+  setFolders,
 }: NavProps) {
   const router = useRouter();
   const pathname = usePathname();
   const { notes, setNotes } = useNoteContext();
 
   const handleAddPage = () => {
-    const newNote = [
-      {
-        id: noteId++,
-        title: "New note",
-        body: "",
-        folderName: "",
-      },
-      ...(notes ?? []),
-    ];
+    const newNote = {
+      id: uuidv4(),
+      title: "New note",
+      body: "",
+      folderId: "",
+    };
+
     console.log(notes);
-    setNotes(newNote);
+    setNotes((prevNote) => [newNote, ...prevNote]);
+    router.push(`/note/${newNote.id}`);
   };
 
   return (
@@ -82,9 +86,9 @@ export default function Nav({
           {notes?.slice(0, 5).map((note) => (
             <List
               key={note.id}
-              onClick={() => router.push(`/note/${note.id.toString()}`)}
+              onClick={() => router.push(`/note/${note.id}`)}
               className={
-                pathname.includes(note.id.toString())
+                pathname.startsWith(`/note/${note.id}`)
                   ? "bg-orange-500"
                   : " hover:bg-white hover:bg-opacity-5"
               }
@@ -103,6 +107,8 @@ export default function Nav({
         setActiveFolder={setActiveFolder}
         setActiveLayout={setActiveLayout}
         notes={notes}
+        folders={folders}
+        setFolders={setFolders}
       />
       {/* more */}
       <nav>

@@ -1,5 +1,5 @@
 import List from "@/ui/components/List";
-import { initialFolders } from "@/lib/data";
+import { v4 as uuidv4 } from "uuid";
 import React, { useState } from "react";
 import {
   FolderIcon,
@@ -11,9 +11,11 @@ import {
 import { CheckIcon } from "@heroicons/react/24/solid";
 import { Folder, Note } from "@/lib/definitions";
 
-let nextId = 3;
+// let nextId = 3;
 
 export default function Folders({
+  folders,
+  setFolders,
   activeFolder,
   setActiveFolder,
   setActiveLayout,
@@ -22,27 +24,30 @@ export default function Folders({
   activeFolder: string;
   setActiveFolder: React.Dispatch<React.SetStateAction<string>>;
   setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
+  folders: Folder[];
+  setFolders: React.Dispatch<React.SetStateAction<Folder[]>>;
   notes: Note[] | undefined;
 }) {
-  const [folders, setFolders] = useState<Folder[]>(initialFolders);
+  const [tempTitle, setTempTitle] = useState<string>("");
+  const [editingFolder, setEditingFolder] = useState<string | null>(null);
 
-  const handleFolderClick = (folder: string) => {
+  const handleFolderClick = (folderId: string) => {
     setActiveLayout(2);
-    setActiveFolder(folder);
+    setActiveFolder(folderId);
   };
 
   const handleAddFolder = () => {
-    const existingFolder = folders.find(
-      (folder) => folder.title === "New folder"
-    );
-    if (existingFolder) return;
+    // const existingFolder = folders.find(
+    //   (folder) => folder.title === "New folder"
+    // );
+    // if (existingFolder) return;
     setFolders([
-      { isEditing: true, title: "New folder", id: nextId++ },
+      { isEditing: true, title: "New folder", id: uuidv4() },
       ...folders,
     ]);
   };
 
-  const handleSaveFolder = (id: number, title: string) => {
+  const handleSaveFolder = (id: string, title: string) => {
     const existingFolder = folders.filter(
       (folder) => folder.title === title
     ).length;
@@ -57,40 +62,48 @@ export default function Folders({
       }
     });
     setFolders(newFolder);
-    setActiveFolder(title);
+    setActiveFolder(id);
   };
 
-  const handleDeleteFolder = (id: number) => {
+  const handleDeleteFolder = (id: string) => {
     const newFolders = folders.filter((folder) => folder.id !== id);
     setFolders(newFolders);
   };
 
-  const handleEditActive = (id: number) => {
-    const newFolder = folders.map((folder) => {
-      if (folder.id === id) {
-        return { ...folder, isEditing: !folder.isEditing };
-      } else {
-        return folder;
-      }
-    });
-    setFolders(newFolder);
+  const handleEditActive = (id: string, title: string) => {
+    setEditingFolder(id);
+    setTempTitle(title);
+    // const newFolder = folders.map((folder) => {
+    //   if (folder.id === id) {
+    //     return { ...folder, isEditing: !folder.isEditing };
+    //   } else {
+    //     return folder;
+    //   }
+    // });
+    // setFolders(newFolder);
   };
 
   const handleEditFolder = (
     e: React.ChangeEvent<HTMLInputElement>,
-    id: number
+    id: string
   ) => {
+    const value = e.target.value;
+
+    // setTempTitle((prev) => ({ ...prev, [id]: value }));
+
     const newFolder = folders.map((folder) => {
       if (folder.id === id) {
         return {
           ...folder,
-          title: e.target.value,
+          title: value,
         };
       } else {
         return folder;
       }
     });
-    setFolders(newFolder);
+    setTimeout(() => {
+      setFolders(newFolder);
+    }, 500);
   };
 
   return (
@@ -104,7 +117,7 @@ export default function Folders({
       </header>
       <ul>
         {folders.map((folder, key) => {
-          if (folder.isEditing) {
+          if (editingFolder == folder.id) {
             return (
               <div
                 key={key}
@@ -117,7 +130,7 @@ export default function Folders({
                     autoFocus
                     className="bg-transparent text-white ml-2.5 h-5 self-center placeholder:text-white placeholder:text-sm  "
                     value={folder.title}
-                    onChange={(e) => handleEditFolder(e, folder.id)}
+                    onChange={(e) => setTempTitle(e.target.value)}
                   />
                 </span>
 
@@ -132,16 +145,16 @@ export default function Folders({
           } else {
             return (
               <List
-                onClick={() => handleFolderClick(folder.title)}
+                onClick={() => handleFolderClick(folder.id)}
                 key={key}
                 className={
-                  folder.title === activeFolder
+                  folder.id === activeFolder
                     ? "bg-white bg-opacity-5"
                     : " hover:bg-white hover:bg-opacity-5"
                 }
               >
                 <span>
-                  {folder.title === activeFolder ? (
+                  {folder.id === activeFolder ? (
                     <FolderOpenIcon className="text-white size-6 inline-block" />
                   ) : (
                     <FolderIcon className="text-white size-6 text-opacity-60 inline-block" />
@@ -154,12 +167,11 @@ export default function Folders({
                 <span>
                   <PencilSquareIcon
                     className="text-white inline-block size-6"
-                    onClick={() => handleEditActive(folder.id)}
+                    onClick={() => handleEditActive(folder.id, folder.title)}
                   />
                   {/* checking if a folder is empty before deleting */}
-                  {notes?.filter(
-                    (note: Note) => note.folderName === folder.title
-                  ).length === 0 && (
+                  {notes?.filter((note: Note) => note.folderId === folder.id)
+                    .length === 0 && (
                     <TrashIcon
                       className="size-6 text-white inline-block ml-1 "
                       onClick={() => handleDeleteFolder(folder.id)}

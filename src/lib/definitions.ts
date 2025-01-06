@@ -1,11 +1,13 @@
+
+
 export interface Note {
-  id: number;
+  id: string;
   title: string;
   body: string;
-  folderName: string;
+  folderId: string;
 }
 export interface Folder {
   isEditing: boolean;
   title: string;
-  id: number;
+  id: string;
 }
