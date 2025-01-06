@@ -1,23 +1,25 @@
-import Card from "@/components/Card";
-import { Note } from "@/data/data";
+import Card from "@/ui/components/Card";
 import cn from "@/utility/cn";
 import React, { useEffect, useState } from "react";
+import { useNoteContext } from "@/context/NoteContext";
 
 interface NoteList {
   noteFolder: string;
   activeLayout: number;
   setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
-  notes: Note[];
+  // notes: Note[];
 }
 
 export default function NoteList({
   noteFolder,
   activeLayout,
   setActiveLayout,
-  notes,
-}: NoteList) {
+}: // notes,
+NoteList) {
+  const { notes } = useNoteContext();
+
   // filter notes for folder
-  const filteredNote = notes.filter((note) => note.folder === noteFolder);
+  const filteredNote = notes?.filter((note) => note.folderName === noteFolder);
   const [isTablet, setisTablet] = useState(false);
 
   useEffect(() => {
@@ -43,7 +45,7 @@ export default function NoteList({
       <h3 onClick={() => setActiveLayout(1)}>Folder</h3>
       <h2 className="text-white font-bold ">{noteFolder}</h2>
       <ul>
-        {filteredNote.map((note, key) => (
+        {filteredNote?.map((note, key) => (
           <Card
             key={key}
             note={note}

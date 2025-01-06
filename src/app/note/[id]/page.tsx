@@ -1,4 +1,4 @@
-import EditPage from "@/layouts/EditPage";
+import EditPage from "@/ui/note/EditPage";
 import React from "react";
 
 export default async function page({

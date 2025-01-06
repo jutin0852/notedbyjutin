@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { sourcesSans3 } from "@/style/icons/fonts";
+import { sourcesSans3 } from "@/ui/fonts";
 
 
 export const metadata: Metadata = {

@@ -1,9 +1,13 @@
 "use client";
-import Icon from "@/components/Icon";
-import Tiptap from "@/components/tiptap";
+import Tiptap from "@/ui/components/tiptap";
 import { useNoteContext } from "@/context/NoteContext";
-import { Note } from "@/data/data";
+import { Note } from "@/lib/definitions";
 import React from "react";
+import {
+  CalendarIcon,
+  FolderIcon,
+} from "@heroicons/react/24/solid";
+import { EllipsisHorizontalCircleIcon } from "@heroicons/react/24/outline";
 
 interface EditPageProps {
   params: string;
@@ -15,6 +19,7 @@ export default function EditPage({ params }: EditPageProps) {
   // const [font, setFont] = useState<number>(16);
   // const [isClient, setIsClient] = useState<boolean>(false);
   const note = notes?.find((note: Note) => note.id.toString() === params);
+  console.log(notes)
   // const [bold, setBold] = useState(false);
 
   // const onBoldToggle = () => setBold((prev) => !prev);
@@ -49,14 +54,14 @@ export default function EditPage({ params }: EditPageProps) {
       {/* <p onClick={() => setActiveLayout(2)}>back</p> */}
       <header className="flex justify-between my-5">
         <h2 className="font-bold text-[32px] tracking-wider">{note?.title}</h2>
-        <Icon src="/icons/threedots.png" className="self-start w-9" />
+        <EllipsisHorizontalCircleIcon  className="size-6 text-opacity-60 text-white "/>
       </header>
 
       {/* Details and options section */}
       <section className="text-sm">
         <div className="pb-3  flex justify-between text-sm">
           <div className=" flex">
-            <Icon src="/icons/calender.png" className="mr-3 " />
+            <CalendarIcon />
             <p className="text-opacity-10 ">Date</p>
           </div>
           <p className="text-opacity-10">21/06/2024</p>
@@ -67,7 +72,7 @@ export default function EditPage({ params }: EditPageProps) {
 
         <div className="py-3  flex justify-between text-sm">
           <div className=" flex">
-            <Icon src="/folder.png" className="mr-3 opacity-50" />
+            <FolderIcon />
             <p className="text-opacity-10 ">folder</p>
           </div>
           <p className="text-opacity-10">Personal</p>

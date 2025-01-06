@@ -1,23 +1,27 @@
 "use client";
-import Folders from "@/app/note/nav/molecules/Folders";
-import Button from "@/components/Button";
-import List from "@/components/List";
-import { Note } from "@/data/data";
-import Plus from "@/style/icons/plus";
+import Folders from "@/ui/note/Folders";
+import Button from "@/ui/components/Button";
+import List from "@/ui/components/List";
 import cn from "@/utility/cn";
-import { ArchiveBoxIcon, DocumentTextIcon, TrashIcon } from "@heroicons/react/24/outline";
+import {
+  ArchiveBoxIcon,
+  DocumentTextIcon,
+  PlusIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
+import { useNoteContext } from "@/context/NoteContext";
 
 interface NavProps {
   activeFolder: string;
   setActiveFolder: React.Dispatch<React.SetStateAction<string>>;
   activeLayout: number;
   setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
-  notes: Note[];
-  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
+  // notes: Note[];
+  // setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
 }
 
 let noteId = 5;
@@ -27,11 +31,10 @@ export default function Nav({
   setActiveFolder,
   activeLayout,
   setActiveLayout,
-  notes,
-  setNotes,
 }: NavProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const { notes, setNotes } = useNoteContext();
 
   const handleAddPage = () => {
     const newNote = [
@@ -39,10 +42,11 @@ export default function Nav({
         id: noteId++,
         title: "New note",
         body: "",
-        folder: "",
+        folderName: "",
       },
-      ...notes,
+      ...(notes ?? []),
     ];
+    console.log(notes);
     setNotes(newNote);
   };
 
@@ -64,17 +68,10 @@ export default function Nav({
               height={13}
             />
           </div>
-          {/* <Image
-            className="inline"
-            src={"/search.png"}
-            alt="search"
-            width={22}
-            height={10}
-          /> */}
         </section>
 
         <Button onClick={() => handleAddPage()}>
-          <Plus />
+          <PlusIcon className="size-5 text-white " />
           <span className="ml-1">New Note</span>
         </Button>
       </header>
@@ -82,7 +79,7 @@ export default function Nav({
       <nav className="my-6">
         <p className="text-white opacity-60 text-sm pl-5 mb-2">Recents</p>
         <ul>
-          {notes.slice(0, 5).map((note) => (
+          {notes?.slice(0, 5).map((note) => (
             <List
               key={note.id}
               onClick={() => router.push(`/note/${note.id.toString()}`)}
@@ -93,7 +90,7 @@ export default function Nav({
               }
             >
               <span>
-                <DocumentTextIcon className="size-6 text-white inline-block"/>
+                <DocumentTextIcon className="size-6 text-white inline-block" />
                 <span className="text-sm ml-2 text-white">{note.title}</span>
               </span>
             </List>

@@ -1,5 +1,6 @@
 "use client";
-import { InitialNotes, Note } from "@/data/data";
+import { InitialNotes } from "@/lib/data";
+import { Note } from "@/lib/definitions";
 import { createContext, useContext, useState } from "react";
 
 interface NoteContextType {

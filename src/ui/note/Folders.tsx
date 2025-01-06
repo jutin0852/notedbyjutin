@@ -1,11 +1,15 @@
-import Icon from "@/components/Icon";
-import List from "@/components/List";
-import { Folder, initialFolders, Note } from "@/data/data";
+import List from "@/ui/components/List";
+import { initialFolders } from "@/lib/data";
 import React, { useState } from "react";
-import Tick from "@/style/icons/tick";
-import FolderIcon from "@/style/icons/folderIcon";
-import { TrashIcon } from "@heroicons/react/24/outline";
-import { PencilSquareIcon } from "@heroicons/react/24/solid";
+import {
+  FolderIcon,
+  FolderOpenIcon,
+  FolderPlusIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline";
+import { CheckIcon } from "@heroicons/react/24/solid";
+import { Folder, Note } from "@/lib/definitions";
 
 let nextId = 3;
 
@@ -18,7 +22,7 @@ export default function Folders({
   activeFolder: string;
   setActiveFolder: React.Dispatch<React.SetStateAction<string>>;
   setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
-  notes: Note[];
+  notes: Note[] | undefined;
 }) {
   const [folders, setFolders] = useState<Folder[]>(initialFolders);
 
@@ -93,9 +97,8 @@ export default function Folders({
     <nav className="my-6">
       <header className="flex justify-between">
         <p className="text-white opacity-60 text-sm pl-5 mb-2">Folders</p>
-        <Icon
-          src={"/icons/add_folder.png"}
-          className="h-5 mr-5"
+        <FolderPlusIcon
+          className="h-5 mr-5 text-white text-opacity-60 "
           onClick={handleAddFolder}
         />
       </header>
@@ -108,18 +111,19 @@ export default function Folders({
                 className="w-full px-5 py-2 flex justify-between my-2 bg-white bg-opacity-5"
               >
                 <span>
-                  <FolderIcon />
+                  <FolderIcon className="text-white  inline-block size-6" />
                   <input
                     type="text"
                     autoFocus
-                    className="bg-transparent text-white h-5 self-center placeholder:text-white placeholder:text-sm  "
+                    className="bg-transparent text-white ml-2.5 h-5 self-center placeholder:text-white placeholder:text-sm  "
                     value={folder.title}
                     onChange={(e) => handleEditFolder(e, folder.id)}
                   />
                 </span>
 
                 <span>
-                  <Tick
+                  <CheckIcon
+                    className="text-white size-5 inline-block"
                     onClick={() => handleSaveFolder(folder.id, folder.title)}
                   />
                 </span>
@@ -136,22 +140,30 @@ export default function Folders({
                     : " hover:bg-white hover:bg-opacity-5"
                 }
               >
-                {" "}
                 <span>
-                  <FolderIcon />
+                  {folder.title === activeFolder ? (
+                    <FolderOpenIcon className="text-white size-6 inline-block" />
+                  ) : (
+                    <FolderIcon className="text-white size-6 text-opacity-60 inline-block" />
+                  )}
+
                   <span className="text-sm ml-2 text-white">
                     {folder.title}
                   </span>
                 </span>
-                <span className="flex gap-2">
-                  {
-                    <PencilSquareIcon
-                      onClick={() => handleEditActive(folder.id)}
+                <span>
+                  <PencilSquareIcon
+                    className="text-white inline-block size-6"
+                    onClick={() => handleEditActive(folder.id)}
+                  />
+                  {/* checking if a folder is empty before deleting */}
+                  {notes?.filter(
+                    (note: Note) => note.folderName === folder.title
+                  ).length === 0 && (
+                    <TrashIcon
+                      className="size-6 text-white inline-block ml-1 "
+                      onClick={() => handleDeleteFolder(folder.id)}
                     />
-                  }
-                  {notes.filter((note: Note) => note.folder === folder.title)
-                    .length === 0 && (
-                    <TrashIcon onClick={() => handleDeleteFolder(folder.id)} />
                   )}
                 </span>
               </List>

@@ -1,4 +1,4 @@
-import { Note } from "@/data/data";
+import { Note } from "@/lib/data";
 import cn from "@/utility/cn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
