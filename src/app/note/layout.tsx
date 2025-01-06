@@ -7,6 +7,7 @@ import cn from "@/utility/cn";
 import { NoteProvider } from "@/context/NoteContext";
 import { Folder } from "@/lib/definitions";
 import { initialFolders } from "@/lib/data";
+import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [activeFolderID, setActiveFolderID] = useState<string>("4");
@@ -39,7 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           )}
         >
           <p className="lg:hidden" onClick={() => setActiveLayout(2)}>
-            back
+            <ArrowLeftCircleIcon />
           </p>
           {children}
         </section>

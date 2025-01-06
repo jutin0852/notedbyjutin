@@ -16,11 +16,9 @@ export default function EditPage({ params }: EditPageProps) {
   const note = notes.find((note: Note) => note.id.toString() === params);
   console.log(notes);
 
-  const [HeadingTitle, setHeadingTitle] = useState<string>("");
   const [editing, setEditing] = useState<boolean>(false);
 
   const handleEdit = (title: string) => {
-    setHeadingTitle(title);
     setEditing(true);
   };
 
