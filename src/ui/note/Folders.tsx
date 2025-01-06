@@ -56,13 +56,15 @@ export default function Folders({
 
     const newFolder = folders.map((folder) => {
       if (folder.id === id) {
-        return { ...folder, isEditing: false };
+        return { ...folder, title: tempTitle };
       } else {
         return folder;
       }
     });
     setFolders(newFolder);
-    setActiveFolder(id);
+    setTempTitle("");
+    setEditingFolder(null);
+    // setActiveFolder(id);
   };
 
   const handleDeleteFolder = (id: string) => {
@@ -73,38 +75,30 @@ export default function Folders({
   const handleEditActive = (id: string, title: string) => {
     setEditingFolder(id);
     setTempTitle(title);
-    // const newFolder = folders.map((folder) => {
-    //   if (folder.id === id) {
-    //     return { ...folder, isEditing: !folder.isEditing };
-    //   } else {
-    //     return folder;
-    //   }
-    // });
-    // setFolders(newFolder);
   };
 
-  const handleEditFolder = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    id: string
-  ) => {
-    const value = e.target.value;
+  // const handleEditFolder = (
+  //   e: React.ChangeEvent<HTMLInputElement>,
+  //   id: string
+  // ) => {
+  //   const value = e.target.value;
 
-    // setTempTitle((prev) => ({ ...prev, [id]: value }));
+  //   // setTempTitle((prev) => ({ ...prev, [id]: value }));
 
-    const newFolder = folders.map((folder) => {
-      if (folder.id === id) {
-        return {
-          ...folder,
-          title: value,
-        };
-      } else {
-        return folder;
-      }
-    });
-    setTimeout(() => {
-      setFolders(newFolder);
-    }, 500);
-  };
+  //   const newFolder = folders.map((folder) => {
+  //     if (folder.id === id) {
+  //       return {
+  //         ...folder,
+  //         title: value,
+  //       };
+  //     } else {
+  //       return folder;
+  //     }
+  //   });
+  //   setTimeout(() => {
+  //     setFolders(newFolder);
+  //   }, 500);
+  // };
 
   return (
     <nav className="my-6">
@@ -118,6 +112,7 @@ export default function Folders({
       <ul>
         {folders.map((folder, key) => {
           if (editingFolder == folder.id) {
+            // folder editing mode
             return (
               <div
                 key={key}
@@ -129,20 +124,21 @@ export default function Folders({
                     type="text"
                     autoFocus
                     className="bg-transparent text-white ml-2.5 h-5 self-center placeholder:text-white placeholder:text-sm  "
-                    value={folder.title}
+                    value={tempTitle}
                     onChange={(e) => setTempTitle(e.target.value)}
                   />
                 </span>
 
                 <span>
                   <CheckIcon
-                    className="text-white size-5 inline-block"
+                    className="text-white size-5 inline-block cursor-pointer"
                     onClick={() => handleSaveFolder(folder.id, folder.title)}
                   />
                 </span>
               </div>
             );
           } else {
+            // folder in list mode
             return (
               <List
                 onClick={() => handleFolderClick(folder.id)}
