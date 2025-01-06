@@ -18,7 +18,7 @@ export default function EditPage({ params }: EditPageProps) {
 
   const [editing, setEditing] = useState<boolean>(false);
 
-  const handleEdit = (title: string) => {
+  const handleEdit = () => {
     setEditing(true);
   };
 
@@ -92,7 +92,7 @@ export default function EditPage({ params }: EditPageProps) {
         ) : (
           <h2
             className="font-bold text-[32px] tracking-wider"
-            onClick={() => handleEdit(note!.title)}
+            onClick={handleEdit}
           >
             {note?.title}
           </h2>
