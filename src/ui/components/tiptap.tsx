@@ -3,7 +3,7 @@
 import { useEditor, EditorContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Icon from "./Icon";
-import { Note } from "@/lib/data";
+import { Note } from "@/lib/definitions";
 
 const Tiptap = ({ note }: { note: Note | undefined }) => {
   const editor = useEditor({
