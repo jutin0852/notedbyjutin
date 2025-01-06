@@ -1,8 +1,8 @@
 import { Folder, Note } from "./definitions";
 
 export const initialFolders: Folder[] = [
-  { isEditing: false, title: "personal", id: "4" },
-  { isEditing: false, title: "friends", id: "5" },
+  { title: "personal", id: "4" },
+  { title: "friends", id: "5" },
 ];
 
 export const InitialNotes: Note[] = [

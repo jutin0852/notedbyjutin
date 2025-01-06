@@ -6,8 +6,9 @@ export interface Note {
   body: string;
   folderId: string;
 }
+
+
 export interface Folder {
-  isEditing: boolean;
   title: string;
   id: string;
 }

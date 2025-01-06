@@ -2,11 +2,8 @@
 import Tiptap from "@/ui/components/tiptap";
 import { useNoteContext } from "@/context/NoteContext";
 import { Note } from "@/lib/definitions";
-import React from "react";
-import {
-  CalendarIcon,
-  FolderIcon,
-} from "@heroicons/react/24/solid";
+import React, { useState } from "react";
+import { CalendarIcon, FolderIcon } from "@heroicons/react/24/solid";
 import { EllipsisHorizontalCircleIcon } from "@heroicons/react/24/outline";
 
 interface EditPageProps {
@@ -15,11 +12,42 @@ interface EditPageProps {
 // type TextStyle = "fontWeight" | "fontStyle" | "textDecoration";
 
 export default function EditPage({ params }: EditPageProps) {
-  const { notes } = useNoteContext();
+  const { notes, setNotes } = useNoteContext();
+  const note = notes.find((note: Note) => note.id.toString() === params);
+  console.log(notes);
+
+  const [HeadingTitle, setHeadingTitle] = useState<string>("");
+  const [editing, setEditing] = useState<boolean>(false);
+
+  const handleEdit = (title: string) => {
+    setHeadingTitle(title);
+    setEditing(true);
+  };
+
+  const handleSave = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: string | undefined
+  ) => {
+    const newNote = notes?.map((note) => {
+      if (note.id === id) {
+        return { ...note, title: e.target.value };
+      } else {
+        return note;
+      }
+    });
+
+    setNotes(newNote);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      setEditing(false);
+    }
+  };
+
   // const [font, setFont] = useState<number>(16);
   // const [isClient, setIsClient] = useState<boolean>(false);
-  const note = notes?.find((note: Note) => note.id.toString() === params);
-  console.log(notes)
+
   // const [bold, setBold] = useState(false);
 
   // const onBoldToggle = () => setBold((prev) => !prev);
@@ -53,8 +81,26 @@ export default function EditPage({ params }: EditPageProps) {
     <>
       {/* <p onClick={() => setActiveLayout(2)}>back</p> */}
       <header className="flex justify-between my-5">
-        <h2 className="font-bold text-[32px] tracking-wider">{note?.title}</h2>
-        <EllipsisHorizontalCircleIcon  className="size-6 text-opacity-60 text-white "/>
+        {editing ? (
+          <input
+            type="text"
+            value={note?.title}
+            onChange={(e) => handleSave(e, note?.id)}
+            className="bg-transparent font-bold text-[32px] tracking-wider text-white border-none outline-none"
+            autoFocus
+            onBlur={() => setEditing(false)}
+            onKeyDown={(e) => handleKeyDown(e)}
+          />
+        ) : (
+          <h2
+            className="font-bold text-[32px] tracking-wider"
+            onClick={() => handleEdit(note!.title)}
+          >
+            {note?.title}
+          </h2>
+        )}
+
+        <EllipsisHorizontalCircleIcon className="size-6 text-opacity-60 text-white " />
       </header>
 
       {/* Details and options section */}

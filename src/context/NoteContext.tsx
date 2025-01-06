@@ -4,7 +4,7 @@ import { Note } from "@/lib/definitions";
 import { createContext, useContext, useState } from "react";
 
 interface NoteContextType {
-  notes: Note[] | undefined;
+  notes: Note[] ;
   setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
 }
 
@@ -13,7 +13,7 @@ export const noteContext = createContext<NoteContextType | undefined>(
 );
 
 export function NoteProvider({ children }: { children: React.ReactNode }) {
-  const [notes, setNotes] = useState<Note[]>(InitialNotes);
+  const [notes, setNotes] = useState<Note[] >(InitialNotes);
 
   return (
     <noteContext.Provider value={{ notes, setNotes }}>

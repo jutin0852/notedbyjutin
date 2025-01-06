@@ -41,10 +41,7 @@ export default function Folders({
     //   (folder) => folder.title === "New folder"
     // );
     // if (existingFolder) return;
-    setFolders([
-      { isEditing: true, title: "New folder", id: uuidv4() },
-      ...folders,
-    ]);
+    setFolders([{ title: "New folder", id: uuidv4() }, ...folders]);
   };
 
   const handleSaveFolder = (id: string, title: string) => {
