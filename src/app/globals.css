@@ -2,10 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
+/* ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+} */
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -19,3 +30,25 @@ body {
   background: #181818;
   /* font-family: Arial, Helvetica, sans-serif; */
 }
+
+ .tiptap ul {
+  @apply list-disc pl-5;
+}
+
+.tiptap ol {
+  @apply list-decimal pl-5;
+}
+
+.tiptap ul div,.tiptap ul div p{
+  @apply inline-block 
+}
+.tiptap ul div{
+  @apply ml-1
+}
+.tiptap ul[data-type="taskList"] {
+  @apply list-none pl-0  ;
+}
+.tiptap ul[data-type="taskList"] li label {
+  @apply relative top-0.5  ;
+}
+

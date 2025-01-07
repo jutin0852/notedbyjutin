@@ -43,41 +43,8 @@ export default function EditPage({ params }: EditPageProps) {
     }
   };
 
-  // const [font, setFont] = useState<number>(16);
-  // const [isClient, setIsClient] = useState<boolean>(false);
-
-  // const [bold, setBold] = useState(false);
-
-  // const onBoldToggle = () => setBold((prev) => !prev);
-  // useEffect(() => {
-  //   setIsClient(true);
-  // }, []);
-
-  // if (!isClient) return;
-  // // increase and decrease font
-  // const increaseFont = () => setFont((prev) => prev + 2);
-  // const decreaseFont = () => setFont((prev) => Math.max(10, prev - 2));
-
-  // const applyToSelection = (style: TextStyle, value: string) => {
-  //   const selection = window.getSelection();
-
-  //   if (selection && selection.rangeCount > 0) {
-  //     const range = selection.getRangeAt(0);
-  //     console.log(range);
-  //     const span = document.createElement("span");
-
-  //     // add style to the span
-  //     span.style[style] = value;
-  //     span.append(range.extractContents());
-  //     range.insertNode(span);
-  //   }
-  //   // clear selection
-  //   selection?.removeAllRanges();
-  // };
-
   return (
     <>
-      {/* <p onClick={() => setActiveLayout(2)}>back</p> */}
       <header className="flex justify-between my-5">
         {editing ? (
           <input
@@ -121,6 +88,7 @@ export default function EditPage({ params }: EditPageProps) {
           </div>
           <p className="text-opacity-10">Personal</p>
         </div>
+
         <Tiptap note={note} />
       </section>
     </>
