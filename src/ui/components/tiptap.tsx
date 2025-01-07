@@ -1,5 +1,4 @@
 "use client";
-
 import { useEditor, EditorContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Note } from "@/lib/definitions";
@@ -14,9 +13,6 @@ import cn from "@/utility/cn";
 import { ItalicIcon } from "@heroicons/react/24/solid";
 import Underline from "@tiptap/extension-underline";
 import Image from "@tiptap/extension-image";
-import BulletList from "@tiptap/extension-bullet-list";
-import ListItem from "@tiptap/extension-list-item";
-import OrderedList from "@tiptap/extension-ordered-list";
 import TaskList from "@tiptap/extension-task-list";
 import TaskItem from "@tiptap/extension-task-item";
 
@@ -25,9 +21,6 @@ const Tiptap = ({ note }: { note: Note | undefined }) => {
     extensions: [
       Underline,
       Image.configure({ inline: true }),
-      BulletList,
-      ListItem,
-      OrderedList,
       TaskList,
       TaskItem.configure({
         nested: true,
@@ -83,7 +76,7 @@ export function Menu({ editor }: { editor: Editor | null }) {
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={cn(
             editor.isActive("bold") ? "bg-white bg-opacity-10" : "",
-            "size-6 inline-block "
+            "size-6 inline-block"
           )}
         />
         <ItalicIcon

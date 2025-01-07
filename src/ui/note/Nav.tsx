@@ -40,6 +40,7 @@ export default function Nav({
   const router = useRouter();
   const pathname = usePathname();
   const { notes, setNotes } = useNoteContext();
+  const createdAt = new Date().toISOString();
 
   const handleAddPage = () => {
     const newNote = {
@@ -47,6 +48,7 @@ export default function Nav({
       title: "New note",
       body: "",
       folderId: "",
+      created_at: createdAt,
     };
 
     console.log(notes);

@@ -4,16 +4,35 @@ import { useNoteContext } from "@/context/NoteContext";
 import { Note } from "@/lib/definitions";
 import React, { useState } from "react";
 import { CalendarIcon, FolderIcon } from "@heroicons/react/24/solid";
-import { EllipsisHorizontalCircleIcon } from "@heroicons/react/24/outline";
+import EllipsisDropDown from "../components/EllipsisDropDown";
+import { ArchiveBoxIcon } from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/24/outline";
 
 interface EditPageProps {
   params: string;
 }
-// type TextStyle = "fontWeight" | "fontStyle" | "textDecoration";
+const dropdownItems = [
+  {
+    label: "Add to favorites",
+    icon: StarIcon,
+    action: () => alert("Edit clicked"),
+  },
+  {
+    label: "Share",
+    icon: ArchiveBoxIcon,
+    action: () => alert("Share clicked"),
+  },
+];
 
 export default function EditPage({ params }: EditPageProps) {
   const { notes, setNotes } = useNoteContext();
-  const note = notes.find((note: Note) => note.id.toString() === params);
+  const note = notes.find((note: Note) => note.id.toString() === params) ?? {
+    id: "",
+    title: "Not Found",
+    created_at: "",
+    body: "",
+    folderId: "",
+  };
   console.log(notes);
 
   const [editing, setEditing] = useState<boolean>(false);
@@ -65,7 +84,7 @@ export default function EditPage({ params }: EditPageProps) {
           </h2>
         )}
 
-        <EllipsisHorizontalCircleIcon className="size-6 text-opacity-60 text-white " />
+        <EllipsisDropDown items={dropdownItems} />
       </header>
 
       {/* Details and options section */}
@@ -75,7 +94,13 @@ export default function EditPage({ params }: EditPageProps) {
             <CalendarIcon />
             <p className="text-opacity-10 ">Date</p>
           </div>
-          <p className="text-opacity-10">21/06/2024</p>
+          <p className="text-opacity-10">
+            {new Date(note.created_at).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
         </div>
 
         {/* divider */}

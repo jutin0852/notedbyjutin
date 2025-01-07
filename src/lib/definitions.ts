@@ -4,6 +4,7 @@ export interface Note {
   title: string;
   body: string;
   folderId: string;
+  created_at: string;
 }
 
 
