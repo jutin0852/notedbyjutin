@@ -37,10 +37,6 @@ export default function Folders({
   };
 
   const handleAddFolder = () => {
-    // const existingFolder = folders.find(
-    //   (folder) => folder.title === "New folder"
-    // );
-    // if (existingFolder) return;
     setFolders([{ title: "New folder", id: uuidv4() }, ...folders]);
   };
 
@@ -163,8 +159,9 @@ export default function Folders({
                     onClick={() => handleEditActive(folder.id, folder.title)}
                   />
                   {/* checking if a folder is empty before deleting */}
-                  {notes?.filter((note: Note) => note.folderId === folder.id)
-                    .length === 0 && (
+                  {notes?.filter((note: Note) =>
+                    note.folderId.includes(folder.id)
+                  ).length === 0 && (
                     <TrashIcon
                       className="size-6 text-white inline-block ml-1 "
                       onClick={() => handleDeleteFolder(folder.id)}

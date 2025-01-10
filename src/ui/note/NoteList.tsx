@@ -4,6 +4,7 @@ import React from "react";
 import { useNoteContext } from "@/context/NoteContext";
 import UseIsTablet from "@/utility/UseTablet";
 import { useFolderContext } from "@/context/FolderContext";
+import { moreFolders } from "./Nav";
 
 interface NoteList {
   activeLayout: number;
@@ -19,10 +20,16 @@ export default function NoteList({
 NoteList) {
   const { notes } = useNoteContext();
   const { folders } = useFolderContext();
-  const folder = folders.find((folder) => folder.id === activeFolderID);
+  const folder = folders.find((folder) => folder.id === activeFolderID) ??
+    moreFolders.find((folder) => folder.id === activeFolderID) ?? {
+      title: "All notes",
+      id: "allnotes",
+    };
 
   // filter notes for folder
-  const filteredNote = notes?.filter((note) => note.folderId === folder?.id);
+  const filteredNote = notes?.filter((note) =>
+    note.folderId.includes(folder.id)
+  );
   const isTablet = UseIsTablet();
   return (
     <section

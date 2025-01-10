@@ -3,7 +3,7 @@ export interface Note {
   id: string;
   title: string;
   body: string;
-  folderId: string;
+  folderId: string[];
   created_at: string;
 }
 

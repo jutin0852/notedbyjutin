@@ -46,7 +46,7 @@ export default function Nav({
       id: uuidv4(),
       title: "New note",
       body: "",
-      folderId: "",
+      folderId: ["allnotes"],
       created_at: createdAt,
     };
 
@@ -57,7 +57,7 @@ export default function Nav({
 
   return (
     <section
-      className={cn(" hidden w-full md:w-1/3 lg:block lg:w-[22%]", {
+      className={cn(" hidden w-full md:w-1/3 lg:block lg:w-[21%]", {
         block: activeLayout == 1,
       })}
     >
@@ -123,10 +123,23 @@ export default function Nav({
           {moreFolders.map((folder, key) => {
             const Icon = folder.icon;
             return (
-              <List key={key}>
+              <List
+                onClick={() => {
+                  setActiveLayout(2);
+                  setActiveFolder(folder.id);
+                }}
+                className={
+                  folder.id === activeFolder
+                    ? "bg-white bg-opacity-5"
+                    : " hover:bg-white hover:bg-opacity-5"
+                }
+                key={key}
+              >
                 <span>
                   <Icon className="size-6 text-white inline-block" />
-                  <span className="text-sm ml-2 text-white">{folder.name}</span>
+                  <span className="text-sm ml-2 text-white">
+                    {folder.title}
+                  </span>
                 </span>
               </List>
             );
@@ -137,8 +150,8 @@ export default function Nav({
   );
 }
 
-const moreFolders = [
-  { name: "Favourite", icon: StarIcon, href: "" },
-  { name: "Trash", icon: TrashIcon, href: "" },
-  { name: "archieve", icon: ArchiveBoxIcon, href: "" },
+export const moreFolders = [
+  { title: "Favorite", id: "favorite", icon: StarIcon, href: "" },
+  { title: "Trash", id: "trash", icon: TrashIcon, href: "" },
+  { title: "archive", id: "archive", icon: ArchiveBoxIcon, href: "" },
 ];

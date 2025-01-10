@@ -12,36 +12,51 @@ import { useFolderContext } from "@/context/FolderContext";
 interface EditPageProps {
   params: string;
 }
-const dropdownItems = [
-  {
-    label: "Add to favorites",
-    icon: StarIcon,
-    action: () => alert("Edit clicked"),
-  },
-  {
-    label: "Share",
-    icon: ArchiveBoxIcon,
-    action: () => alert("Share clicked"),
-  },
-];
 
 export default function EditPage({ params }: EditPageProps) {
   const { notes, setNotes } = useNoteContext();
+  const [editing, setEditing] = useState<boolean>(false);
+  const { folders } = useFolderContext();
+
   const note = notes.find((note: Note) => note.id.toString() === params) ?? {
     id: "",
     title: "Not Found",
     created_at: "",
     body: "",
-    folderId: "",
+    folderId: [],
   };
-  const { folders } = useFolderContext();
-  const noteFolder = folders.find((folder) => folder.id === note.folderId) ?? {
-    title: "all",
+
+  const noteFolder = folders.find((folder) =>
+    note.folderId.includes(folder.id)
+  ) ?? {
+    title: "All Notes",
     id: "1",
   };
 
+  const AddToFolder = (noteId: string, newFolder: string) => {
+    const updateNote = notes.map((note) => {
+      if (note.id === noteId) {
+        return { ...note, folderId: [...note.folderId, newFolder] };
+      } else {
+        return note;
+      }
+    });
+    setNotes(updateNote);
+    console.log(notes);
+  };
 
-  const [editing, setEditing] = useState<boolean>(false);
+  const dropdownItems = [
+    {
+      label: "Add to favorites",
+      icon: StarIcon,
+      action: (noteId: string) => AddToFolder(noteId, "favorite"),
+    },
+    {
+      label: "Archive",
+      icon: ArchiveBoxIcon,
+      action: (noteId: string) => AddToFolder(noteId, "archive"),
+    },
+  ];
 
   const handleEdit = () => {
     setEditing(true);
@@ -90,7 +105,7 @@ export default function EditPage({ params }: EditPageProps) {
           </h2>
         )}
 
-        <EllipsisDropDown items={dropdownItems} />
+        <EllipsisDropDown items={dropdownItems} note={note} />
       </header>
 
       {/* Details and options section */}
@@ -113,14 +128,14 @@ export default function EditPage({ params }: EditPageProps) {
         <div className="border-b border-white border-opacity-10"></div>
 
         <div className="py-3  flex justify-between text-sm">
-          <div className=" flex">
+          <div className="flex">
             <FolderIcon />
             <p className="text-opacity-10 ">folder</p>
           </div>
           <p className="text-opacity-10">{noteFolder.title}</p>
         </div>
 
-        <Tiptap note={note}  />
+        <Tiptap note={note} />
       </section>
     </>
   );
