@@ -1,7 +1,6 @@
 "use client";
 import { Note } from "@/lib/definitions";
 import { EllipsisHorizontalCircleIcon } from "@heroicons/react/24/outline";
-import { TrashIcon } from "@heroicons/react/24/outline";
 
 import React, { useEffect, useRef, useState } from "react";
 
@@ -63,15 +62,7 @@ export default function EllipsisDropDown({ items, note }: EllipsisProp) {
               </button>
             );
           })}
-          <button
-            onClick={() => {
-                           
-            }}
-            className="block py-3 px-3 border-t border-solid border-white border-opacity-5 w-full text-left hover:bg-white hover:bg-opacity-10"
-          >
-            <TrashIcon className="size-5 inline mr-2 " />
-            Delete
-          </button>
+         
         </div>
       )}
     </div>

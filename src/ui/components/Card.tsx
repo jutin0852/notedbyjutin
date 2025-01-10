@@ -23,7 +23,13 @@ export default function Card({ note, onClick }: CardProps) {
         )}
       >
         <p className="text-sm">{note.title}</p>
-        <span className="text-xs mr-2">11/2/2023</span>
+        <span className="text-xs mr-2">
+          {new Date(note.created_at).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+          })}
+        </span>
         <span className=" truncate whitespace-normal text-xs break-words line-clamp-1">
           {stripHtml(note.body)}
         </span>

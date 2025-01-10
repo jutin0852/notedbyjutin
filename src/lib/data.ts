@@ -40,3 +40,4 @@ export const InitialNotes: Note[] = [
     created_at: "2025-01-07",
   },
 ];
+

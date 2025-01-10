@@ -5,10 +5,10 @@ import Button from "@/ui/components/Button";
 import List from "@/ui/components/List";
 import cn from "@/utility/cn";
 import {
-  ArchiveBoxIcon,
+  // ArchiveBoxIcon,
   DocumentTextIcon,
   PlusIcon,
-  TrashIcon,
+  // TrashIcon,
 } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
@@ -23,10 +23,8 @@ interface NavProps {
   setActiveFolder: React.Dispatch<React.SetStateAction<string>>;
   activeLayout: number;
   setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
-  // setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
 }
 
-// let noteId = 5;
 
 export default function Nav({
   activeFolder,
@@ -42,11 +40,12 @@ export default function Nav({
   const createdAt = new Date().toISOString();
 
   const handleAddPage = () => {
+    
     const newNote = {
       id: uuidv4(),
       title: "New note",
       body: "",
-      folderId: ["allnotes"],
+      folderId: ["allnotes",activeFolder],
       created_at: createdAt,
     };
 
@@ -152,6 +151,6 @@ export default function Nav({
 
 export const moreFolders = [
   { title: "Favorite", id: "favorite", icon: StarIcon, href: "" },
-  { title: "Trash", id: "trash", icon: TrashIcon, href: "" },
-  { title: "archive", id: "archive", icon: ArchiveBoxIcon, href: "" },
+  // { title: "Trash", id: "trash", icon: TrashIcon, href: "" },
+  // { title: "archive", id: "archive", icon: ArchiveBoxIcon, href: "" },
 ];

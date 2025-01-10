@@ -5,8 +5,8 @@ import { Note } from "@/lib/definitions";
 import React, { useState } from "react";
 import { CalendarIcon, FolderIcon } from "@heroicons/react/24/solid";
 import EllipsisDropDown from "../components/EllipsisDropDown";
-import { ArchiveBoxIcon } from "@heroicons/react/24/outline";
-import { StarIcon } from "@heroicons/react/24/outline";
+// import { ArchiveBoxIcon } from "@heroicons/react/24/outline";
+import { StarIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useFolderContext } from "@/context/FolderContext";
 
 interface EditPageProps {
@@ -42,7 +42,6 @@ export default function EditPage({ params }: EditPageProps) {
       }
     });
     setNotes(updateNote);
-    console.log(notes);
   };
 
   const dropdownItems = [
@@ -52,9 +51,12 @@ export default function EditPage({ params }: EditPageProps) {
       action: (noteId: string) => AddToFolder(noteId, "favorite"),
     },
     {
-      label: "Archive",
-      icon: ArchiveBoxIcon,
-      action: (noteId: string) => AddToFolder(noteId, "archive"),
+      label: "Delete",
+      icon: TrashIcon,
+      action: (noteId: string) => {
+        const deleteNote = notes.filter((note) => note.id !== noteId);
+        setNotes(deleteNote);
+      },
     },
   ];
 
