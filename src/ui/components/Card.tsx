@@ -3,6 +3,7 @@ import cn from "@/utility/cn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import { stripHtml } from "@/utility/striphtml";
 
 interface CardProps {
   note: Note;
@@ -17,13 +18,15 @@ export default function Card({ note, onClick }: CardProps) {
     <Link href={`/note/${noteId}`} onClick={onClick}>
       <div
         className={cn(
-          "bg-white mt-4 text-white bg-opacity-5 p-4 w-full rounded hover:bg-opacity-10",
+          "bg-white mt-4 text-white bg-opacity-5 p-4 w-full rounded hover:bg-opacity-10 ",
           className
         )}
       >
         <p className="text-sm">{note.title}</p>
         <span className="text-xs mr-2">11/2/2023</span>
-        <span className=" truncate whitespace-normal text-xs">{note.body}</span>
+        <span className=" truncate whitespace-normal text-xs break-words line-clamp-1">
+          {stripHtml(note.body)}
+        </span>
       </div>
     </Link>
   );

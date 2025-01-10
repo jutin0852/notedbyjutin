@@ -15,11 +15,10 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { useNoteContext } from "@/context/NoteContext";
-import { Folder } from "@/lib/definitions";
+import UseIsTablet from "@/utility/UseTablet";
+import { useFolderContext } from "@/context/FolderContext";
 
 interface NavProps {
-  folders: Folder[];
-  setFolders: React.Dispatch<React.SetStateAction<Folder[]>>;
   activeFolder: string;
   setActiveFolder: React.Dispatch<React.SetStateAction<string>>;
   activeLayout: number;
@@ -34,12 +33,12 @@ export default function Nav({
   setActiveFolder,
   activeLayout,
   setActiveLayout,
-  folders,
-  setFolders,
 }: NavProps) {
   const router = useRouter();
   const pathname = usePathname();
   const { notes, setNotes } = useNoteContext();
+  const { folders, setFolders } = useFolderContext();
+  const isTablet = UseIsTablet();
   const createdAt = new Date().toISOString();
 
   const handleAddPage = () => {
@@ -58,7 +57,7 @@ export default function Nav({
 
   return (
     <section
-      className={cn(" hidden basis-full md:basis-1/3 lg:block lg:basis-[20%]", {
+      className={cn(" hidden w-full md:w-1/3 lg:block lg:w-[22%]", {
         block: activeLayout == 1,
       })}
     >
@@ -88,9 +87,14 @@ export default function Nav({
           {notes?.slice(0, 5).map((note) => (
             <List
               key={note.id}
-              onClick={() => router.push(`/note/${note.id}`)}
+              onClick={() => {
+                router.push(`/note/${note.id}`);
+                if (isTablet) {
+                  setActiveLayout(0);
+                }
+              }}
               className={
-                pathname.startsWith(`/note/${note.id}`)
+                pathname === `/note/${note.id}`
                   ? "bg-orange-500"
                   : " hover:bg-white hover:bg-opacity-5"
               }

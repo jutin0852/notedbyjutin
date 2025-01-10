@@ -4,15 +4,16 @@ import { Folder } from "@/lib/definitions";
 import { createContext, useContext, useState } from "react";
 
 interface FolderContextType {
-  folders: Folder[] | undefined;
+  folders: Folder[];
   setFolders: React.Dispatch<React.SetStateAction<Folder[]>>;
 }
 
-export const folderContext = createContext<FolderContextType | undefined>(
-  undefined
-);
+export const folderContext = createContext<FolderContextType>({
+  folders: [],
+  setFolders: () => {},
+});
 
-export function NoteProvider({ children }: { children: React.ReactNode }) {
+export function FolderProvider({ children }: { children: React.ReactNode }) {
   const [folders, setFolders] = useState<Folder[]>(initialFolders);
 
   return (

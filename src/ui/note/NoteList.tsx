@@ -1,45 +1,33 @@
 import Card from "@/ui/components/Card";
 import cn from "@/utility/cn";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNoteContext } from "@/context/NoteContext";
-import { Folder } from "@/lib/definitions";
+import UseIsTablet from "@/utility/UseTablet";
+import { useFolderContext } from "@/context/FolderContext";
 
 interface NoteList {
-  folder: Folder | undefined;
   activeLayout: number;
   setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
-  // notes: Note[];
+  activeFolderID: string;
 }
 
 export default function NoteList({
-  folder,
   activeLayout,
   setActiveLayout,
+  activeFolderID,
 }: // notes,
 NoteList) {
   const { notes } = useNoteContext();
+  const { folders } = useFolderContext();
+  const folder = folders.find((folder) => folder.id === activeFolderID);
 
   // filter notes for folder
   const filteredNote = notes?.filter((note) => note.folderId === folder?.id);
-  const [isTablet, setisTablet] = useState(false);
-
-  useEffect(() => {
-    const screenSizeUpdate = () => {
-      setisTablet(window.innerWidth < 768);
-    };
-
-    screenSizeUpdate();
-    window.addEventListener("resize", screenSizeUpdate);
-
-    return () => {
-      window.removeEventListener("resize", screenSizeUpdate);
-    };
-  }, []);
-
+  const isTablet = UseIsTablet();
   return (
     <section
       className={cn(
-        "py-5 text-white  px-5 bg-[#1C1C1C] hidden basis-full md:basis-1/3 lg:basis-3/12 lg:block",
+        "py-5 text-white  px-5 bg-[#1C1C1C] hidden w-full md:w-1/3 lg:w-[22%] lg:block",
         { block: activeLayout === 2 }
       )}
     >

@@ -15,8 +15,11 @@ import Underline from "@tiptap/extension-underline";
 import Image from "@tiptap/extension-image";
 import TaskList from "@tiptap/extension-task-list";
 import TaskItem from "@tiptap/extension-task-item";
+import { useNoteContext } from "@/context/NoteContext";
 
 const Tiptap = ({ note }: { note: Note | undefined }) => {
+  const { setNotes } = useNoteContext();
+
   const editor = useEditor({
     extensions: [
       Underline,
@@ -31,10 +34,23 @@ const Tiptap = ({ note }: { note: Note | undefined }) => {
     editorProps: {
       attributes: {
         class:
-          "py-3 mx-auto h-[60vh] focus:outline-none list-inside list-disc   ",
+          "py-3 mx-auto h-[60vh] focus:outline-none list-inside list-disc break-words   ",
       },
     },
     content: note?.body,
+    onUpdate: ({ editor }) => {
+      console.log(editor.getHTML());
+
+      setNotes((prevNotes) =>
+        prevNotes.map((prevNote) => {
+          if (prevNote.id === note?.id) {
+            return { ...prevNote, body: editor.getHTML() };
+          } else {
+            return prevNote;
+          }
+        })
+      );
+    },
   });
 
   return (

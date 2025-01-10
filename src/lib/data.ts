@@ -3,6 +3,7 @@ import { Folder, Note } from "./definitions";
 export const initialFolders: Folder[] = [
   { title: "personal", id: "4" },
   { title: "friends", id: "5" },
+  { title: "all", id: "1" },
 ];
 
 export const InitialNotes: Note[] = [
@@ -31,7 +32,7 @@ export const InitialNotes: Note[] = [
   {
     id: "6",
     title: "olise",
-    body: "good is goood yess",
+    body: "good is goood yessccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
     folderId: "5",
     created_at: "2025-01-07",
   },

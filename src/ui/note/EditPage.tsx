@@ -7,6 +7,7 @@ import { CalendarIcon, FolderIcon } from "@heroicons/react/24/solid";
 import EllipsisDropDown from "../components/EllipsisDropDown";
 import { ArchiveBoxIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/outline";
+import { useFolderContext } from "@/context/FolderContext";
 
 interface EditPageProps {
   params: string;
@@ -33,7 +34,12 @@ export default function EditPage({ params }: EditPageProps) {
     body: "",
     folderId: "",
   };
-  console.log(notes);
+  const { folders } = useFolderContext();
+  const noteFolder = folders.find((folder) => folder.id === note.folderId) ?? {
+    title: "all",
+    id: "1",
+  };
+
 
   const [editing, setEditing] = useState<boolean>(false);
 
@@ -111,10 +117,10 @@ export default function EditPage({ params }: EditPageProps) {
             <FolderIcon />
             <p className="text-opacity-10 ">folder</p>
           </div>
-          <p className="text-opacity-10">Personal</p>
+          <p className="text-opacity-10">{noteFolder.title}</p>
         </div>
 
-        <Tiptap note={note} />
+        <Tiptap note={note}  />
       </section>
     </>
   );
