@@ -18,7 +18,7 @@ export default function Card({ note, onClick }: CardProps) {
     <Link href={`/note/${noteId}`} onClick={onClick}>
       <div
         className={cn(
-          "bg-white mt-4 text-white bg-opacity-5 p-4 w-full rounded hover:bg-opacity-10 ",
+          "dark:bg-white bg-black bg-opacity-5  mt-4 dark:text-white dark:bg-opacity-5 p-4 w-full rounded hover:bg-opacity-10 ",
           className
         )}
       >

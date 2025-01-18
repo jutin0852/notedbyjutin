@@ -7,16 +7,17 @@ import cn from "@/utility/cn";
 import {
   // ArchiveBoxIcon,
   DocumentTextIcon,
+  PencilIcon,
   PlusIcon,
   // TrashIcon,
 } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { useNoteContext } from "@/context/NoteContext";
 import UseIsTablet from "@/utility/UseTablet";
 import { useFolderContext } from "@/context/FolderContext";
+import ThemeSwitch from "../components/ThemeSwitch";
 
 interface NavProps {
   activeFolder: string;
@@ -24,7 +25,6 @@ interface NavProps {
   activeLayout: number;
   setActiveLayout: React.Dispatch<React.SetStateAction<number>>;
 }
-
 
 export default function Nav({
   activeFolder,
@@ -40,12 +40,11 @@ export default function Nav({
   const createdAt = new Date().toISOString();
 
   const handleAddPage = () => {
-    
     const newNote = {
       id: uuidv4(),
       title: "New note",
       body: "",
-      folderId: ["allnotes",activeFolder],
+      folderId: ["allnotes", activeFolder],
       created_at: createdAt,
     };
 
@@ -56,32 +55,29 @@ export default function Nav({
 
   return (
     <section
-      className={cn(" hidden w-full md:w-1/3 lg:block lg:w-[21%]", {
+      className={cn(" hidden w-full md:w-1/3 lg:block lg:w-[21%]  ", {
         block: activeLayout == 1,
       })}
     >
       <header className="p-5">
         <section className="flex justify-between mb-6">
-          <div className="text-white">
+          <div className="dark:text-white">
             <i className="text-lg">NotedByJutin</i>
-            <Image
-              className="inline relative bottom-3 left-1 "
-              src={"/pen.png"}
-              alt="pen"
-              width={13}
-              height={13}
-            />
+            <PencilIcon className="size-4 inline relative bottom-3 left-1 text-black dark:text-white " />
           </div>
+          <ThemeSwitch />
         </section>
 
         <Button onClick={() => handleAddPage()}>
-          <PlusIcon className="size-5 text-white " />
+          <PlusIcon className="size-5 dark:text-white " />
           <span className="ml-1">New Note</span>
         </Button>
       </header>
       {/* pages */}
       <nav className="my-6">
-        <p className="text-white opacity-60 text-sm pl-5 mb-2">Recents</p>
+        <p className="dark:text-white dark:text-opacity-60 text-sm pl-5 mb-2">
+          Recents
+        </p>
         <ul>
           {notes?.slice(0, 5).map((note) => (
             <List
@@ -94,13 +90,15 @@ export default function Nav({
               }}
               className={
                 pathname === `/note/${note.id}`
-                  ? "bg-orange-500"
+                  ? "bg-[#FF9500]"
                   : " hover:bg-white hover:bg-opacity-5"
               }
             >
               <span>
-                <DocumentTextIcon className="size-6 text-white inline-block" />
-                <span className="text-sm ml-2 text-white">{note.title}</span>
+                <DocumentTextIcon className="size-6 dark:text-white inline-block" />
+                <span className="text-sm ml-2 dark:text-white">
+                  {note.title}
+                </span>
               </span>
             </List>
           ))}
@@ -117,7 +115,7 @@ export default function Nav({
       />
       {/* more */}
       <nav>
-        <p className="text-white opacity-60 text-sm pl-5 mb-2">More</p>
+        <p className="dark:text-white opacity-60 text-sm pl-5 mb-2">More</p>
         <ul>
           {moreFolders.map((folder, key) => {
             const Icon = folder.icon;
@@ -135,8 +133,8 @@ export default function Nav({
                 key={key}
               >
                 <span>
-                  <Icon className="size-6 text-white inline-block" />
-                  <span className="text-sm ml-2 text-white">
+                  <Icon className="size-6 dark:text-white inline-block" />
+                  <span className="text-sm ml-2 dark:text-white">
                     {folder.title}
                   </span>
                 </span>

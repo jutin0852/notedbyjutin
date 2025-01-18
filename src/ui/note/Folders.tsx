@@ -96,9 +96,11 @@ export default function Folders({
   return (
     <nav className="my-6">
       <header className="flex justify-between">
-        <p className="text-white opacity-60 text-sm pl-5 mb-2">Folders</p>
+        <p className="dark:text-white dark:text-opacity-60 text-sm pl-5 mb-2">
+          Folders
+        </p>
         <FolderPlusIcon
-          className="h-5 mr-5 text-white text-opacity-60 "
+          className="h-5 mr-5 dark:text-white dark:text-opacity-60 "
           onClick={handleAddFolder}
         />
       </header>
@@ -109,14 +111,14 @@ export default function Folders({
             return (
               <div
                 key={key}
-                className="w-full px-5 py-2 flex justify-between my-2 bg-white bg-opacity-5"
+                className="w-full px-5 py-2 flex justify-between my-2  dark:bg-white bg-opacity-5"
               >
                 <span>
-                  <FolderIcon className="text-white  inline-block size-6" />
+                  <FolderIcon className="dark:text-white  inline-block size-6" />
                   <input
                     type="text"
                     autoFocus
-                    className="bg-transparent text-white ml-2.5 h-5 self-center placeholder:text-white placeholder:text-sm  "
+                    className="bg-transparent dark:text-white ml-2.5 h-5 self-center dark:placeholder:text-white placeholder:text-sm  "
                     value={tempTitle}
                     onChange={(e) => setTempTitle(e.target.value)}
                   />
@@ -124,7 +126,7 @@ export default function Folders({
 
                 <span>
                   <CheckIcon
-                    className="text-white size-5 inline-block cursor-pointer"
+                    className="dark:text-white size-5 inline-block cursor-pointer"
                     onClick={() => handleSaveFolder(folder.id, folder.title)}
                   />
                 </span>
@@ -138,24 +140,24 @@ export default function Folders({
                 key={key}
                 className={
                   folder.id === activeFolder
-                    ? "bg-white bg-opacity-5"
-                    : " hover:bg-white hover:bg-opacity-5"
+                    ? "bg-black bg-opacity-5 dark:bg-white dark:bg-opacity-5"
+                    : "hover:bg-black hover:bg-opacity-5 dark:hover:bg-white dark:hover:bg-opacity-5"
                 }
               >
                 <span>
                   {folder.id === activeFolder ? (
-                    <FolderOpenIcon className="text-white size-6 inline-block" />
+                    <FolderOpenIcon className="dark:text-white size-6 inline-block" />
                   ) : (
-                    <FolderIcon className="text-white size-6 text-opacity-60 inline-block" />
+                    <FolderIcon className="dark:text-white size-6 dark:text-opacity-60 inline-block" />
                   )}
 
-                  <span className="text-sm ml-2 text-white">
+                  <span className="text-sm ml-2 dark:text-white">
                     {folder.title}
                   </span>
                 </span>
                 <span>
                   <PencilSquareIcon
-                    className="text-white inline-block size-6"
+                    className="dark:text-white inline-block size-6"
                     onClick={() => handleEditActive(folder.id, folder.title)}
                   />
                   {/* checking if a folder is empty before deleting */}
@@ -163,7 +165,7 @@ export default function Folders({
                     note.folderId.includes(folder.id)
                   ).length === 0 && (
                     <TrashIcon
-                      className="size-6 text-white inline-block ml-1 "
+                      className="size-6 dark:text-white inline-block ml-1 "
                       onClick={() => handleDeleteFolder(folder.id)}
                     />
                   )}

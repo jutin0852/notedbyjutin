@@ -5,6 +5,7 @@ import { useNoteContext } from "@/context/NoteContext";
 import UseIsTablet from "@/utility/UseTablet";
 import { useFolderContext } from "@/context/FolderContext";
 import { moreFolders } from "./Nav";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 interface NoteList {
   activeLayout: number;
@@ -34,12 +35,15 @@ NoteList) {
   return (
     <section
       className={cn(
-        "py-5 text-white  px-5 bg-[#1C1C1C] hidden w-full md:w-1/3 lg:w-[22%] lg:block",
+        "py-5  bg-[#EFEFEF] dark:text-white  px-5 dark:bg-[#1C1C1C] hidden w-full md:w-1/3 lg:w-[22%] lg:block h-screen",
         { block: activeLayout === 2 }
       )}
     >
-      <h3 onClick={() => setActiveLayout(1)}>Folder</h3>
-      <h2 className="text-white font-bold ">{folder?.title}</h2>
+      <h3 onClick={() => setActiveLayout(1)}>
+        <ArrowLeftIcon className="size-5 mr-1 dark:text-white dark:text-opacity-60 cursor-pointer  lg:hidden inline" />
+        Folder
+      </h3>
+      <h2 className="dark:text-white font-bold ">{folder?.title}</h2>
       <ul>
         {filteredNote?.map((note, key) => (
           <Card

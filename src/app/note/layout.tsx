@@ -9,12 +9,12 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Provider from "@/context/Provider";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [activeFolderID, setActiveFolderID] = useState<string>("4");
+  const [activeFolderID, setActiveFolderID] = useState<string>("allnotes");
   const [activeLayout, setActiveLayout] = useState<number>(3);
 
   return (
     <Provider>
-      <div className="flex ">
+      <div className="flex dark:bg-[#181818]">
         <Nav
           key={1}
           activeFolder={activeFolderID}
@@ -35,7 +35,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           )}
         >
           <p className="lg:hidden" onClick={() => setActiveLayout(2)}>
-            <ArrowLeftIcon className="size-6 text-white text-opacity-60 cursor-pointer" />
+            <ArrowLeftIcon className="size-6 text-white text-opacity-60 cursor-pointer md:hidden" />
           </p>
           {children}
         </section>

@@ -42,10 +42,10 @@ export default function EllipsisDropDown({ items, note }: EllipsisProp) {
     <div className="relative" ref={dropDownRef}>
       <EllipsisHorizontalCircleIcon
         onClick={handleClick}
-        className="size-6 text-opacity-60 text-white "
+        className="size-6 text-black dark:text-opacity-60 dark:text-white "
       />
       {isOpen && (
-        <div className="absolute -right-2 top-8 bg-[#333333]  w-44 rounded ">
+        <div className="absolute -right-2 top-8 dark:bg-[#333333]  w-44 rounded ">
           {items.map((item, key) => {
             const Icon = item.icon;
             return (
@@ -55,14 +55,13 @@ export default function EllipsisDropDown({ items, note }: EllipsisProp) {
                   item.action(note.id);
                   setIsOpen((prev) => !prev);
                 }}
-                className="block py-3 px-3 w-full text-left hover:bg-white hover:bg-opacity-10 "
+                className="block py-3 px-3 w-full text-left dark:hover:bg-white dark:hover:bg-opacity-10 "
               >
                 <Icon className="size-5 inline mr-2 font-bold" />
                 {item.label}
               </button>
             );
           })}
-         
         </div>
       )}
     </div>

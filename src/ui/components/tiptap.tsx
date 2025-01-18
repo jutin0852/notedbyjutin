@@ -34,7 +34,7 @@ const Tiptap = ({ note }: { note: Note | undefined }) => {
     editorProps: {
       attributes: {
         class:
-          "py-3 mx-auto h-[60vh] focus:outline-none list-inside list-disc break-words   ",
+          "py-3 mx-auto h-[60vh] focus:outline-none list-inside list-disc break-words text-black dark:text-white   ",
       },
     },
     content: note?.body,
@@ -76,11 +76,13 @@ export function Menu({ editor }: { editor: Editor | null }) {
   };
 
   return (
-    <div className="flex gap-6 py-3 border-y border-white border-opacity-10 ">
+    <div className="flex gap-6 py-3 border-y dark:border-white dark:border-opacity-10 ">
       <button
         onClick={() => editor.chain().focus().setParagraph().run()}
         className={cn(
-          editor.isActive("paragraph") ? "bg-white bg-opacity-10" : "",
+          editor.isActive("paragraph")
+            ? "bg-black bg-opacity-10 text-black dark:bg-white dark:bg-opacity-10 dark:text-white"
+            : "",
           "p-1 rounded"
         )}
       >
@@ -91,21 +93,27 @@ export function Menu({ editor }: { editor: Editor | null }) {
         <BoldIcon
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={cn(
-            editor.isActive("bold") ? "bg-white bg-opacity-10" : "",
+            editor.isActive("bold")
+              ? "dark:bg-white dark:bg-opacity-10  dark:text-white bg-black bg-opacity-10 text-black "
+              : "text-black dark:text-white ",
             "size-6 inline-block"
           )}
         />
         <ItalicIcon
           onClick={() => editor.chain().focus().toggleItalic().run()}
           className={cn(
-            editor.isActive("italic") ? "bg-white bg-opacity-10" : "",
+            editor.isActive("italic")
+              ? "dark:bg-white dark:bg-opacity-10 dark:text-white bg-black bg-opacity-10 text-black "
+              : "text-black dark:text-white ",
             "size-6 inline-block"
           )}
         />
         <UnderlineIcon
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           className={cn(
-            editor.isActive("underline") ? "bg-white bg-opacity-10" : "",
+            editor.isActive("underline")
+              ? "dark:bg-white dark:bg-opacity-10 dark:text-white bg-black bg-opacity-10 text-black "
+              : "text-black dark:text-white ",
             "size-6 inline-block"
           )}
         />
@@ -114,14 +122,18 @@ export function Menu({ editor }: { editor: Editor | null }) {
         <ListBulletIcon
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={cn(
-            editor.isActive("bulletList") && "bg-white bg-opacity-10",
+            editor.isActive("bulletList")
+              ? "dark:bg-white dark:bg-opacity-10 dark:text-white bg-black bg-opacity-10 text-black "
+              : "text-black dark:text-white ",
             "inline-block size-6 "
           )}
         />
         <QueueListIcon
           onClick={() => editor.chain().focus().toggleTaskList().run()}
           className={cn(
-            editor.isActive("taskList") ? "is-active" : "",
+            editor.isActive("taskList")
+              ? "dark:bg-white dark:bg-opacity-10 dark:text-white bg-black bg-opacity-10 text-black "
+              : "text-black dark:text-white ",
             "size-6 ml-2 inline-block "
           )}
         />

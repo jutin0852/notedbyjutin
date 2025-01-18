@@ -3,10 +3,9 @@ import Tiptap from "@/ui/components/tiptap";
 import { useNoteContext } from "@/context/NoteContext";
 import { Note } from "@/lib/definitions";
 import React, { useState } from "react";
-import { CalendarIcon, FolderIcon } from "@heroicons/react/24/solid";
 import EllipsisDropDown from "../components/EllipsisDropDown";
 // import { ArchiveBoxIcon } from "@heroicons/react/24/outline";
-import { StarIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { CalendarIcon, FolderIcon, StarIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useFolderContext } from "@/context/FolderContext";
 
 interface EditPageProps {
@@ -87,20 +86,20 @@ export default function EditPage({ params }: EditPageProps) {
 
   return (
     <>
-      <header className="flex justify-between my-5">
+      <header className="flex justify-between my-5 ">
         {editing ? (
           <input
             type="text"
             value={note?.title}
             onChange={(e) => handleSave(e, note?.id)}
-            className="bg-transparent font-bold text-[32px] tracking-wider text-white border-none outline-none"
+            className="bg-transparent font-bold text-[32px] tracking-wider text-black dark:text-white border-none outline-none"
             autoFocus
             onBlur={() => setEditing(false)}
             onKeyDown={(e) => handleKeyDown(e)}
           />
         ) : (
           <h2
-            className="font-bold text-[32px] tracking-wider"
+            className="font-bold text-[32px] tracking-wider text-black dark:text-white"
             onClick={handleEdit}
           >
             {note?.title}
@@ -115,9 +114,11 @@ export default function EditPage({ params }: EditPageProps) {
         <div className="pb-3  flex justify-between text-sm">
           <div className=" flex">
             <CalendarIcon />
-            <p className="text-opacity-10 ">Date</p>
+            <p className="text-black dark:text-white  ">
+              Date
+            </p>
           </div>
-          <p className="text-opacity-10">
+          <p className=" text-black dark:text-white  ">
             {new Date(note.created_at).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
@@ -127,14 +128,18 @@ export default function EditPage({ params }: EditPageProps) {
         </div>
 
         {/* divider */}
-        <div className="border-b border-white border-opacity-10"></div>
+        <div className="border-b dark:border-white dark:border-opacity-10"></div>
 
         <div className="py-3  flex justify-between text-sm">
           <div className="flex">
             <FolderIcon />
-            <p className="text-opacity-10 ">folder</p>
+            <p className=" text-black dark:text-white ">
+              folder
+            </p>
           </div>
-          <p className="text-opacity-10">{noteFolder.title}</p>
+          <p className=" text-black dark:text-white">
+            {noteFolder.title}
+          </p>
         </div>
 
         <Tiptap note={note} />
