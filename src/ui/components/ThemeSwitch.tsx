@@ -30,11 +30,11 @@ const ThemeSwitch = () => {
     );
 
   if (resolvedTheme === "dark") {
-    return <SunIcon className="size-5" onClick={() => setTheme("light")} />;
+    return <SunIcon className="size-5 cursor-pointer" onClick={() => setTheme("light")} />;
   }
 
   if (resolvedTheme === "light") {
-    return <MoonIcon className="size-5" onClick={() => setTheme("dark")} />;
+    return <MoonIcon className="size-5 cursor-pointer" onClick={() => setTheme("dark")} />;
   }
 };
 

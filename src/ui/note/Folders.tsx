@@ -100,7 +100,7 @@ export default function Folders({
           Folders
         </p>
         <FolderPlusIcon
-          className="h-5 mr-5 dark:text-white dark:text-opacity-60 "
+          className="h-5 mr-5 dark:text-white dark:text-opacity-60 cursor-pointer "
           onClick={handleAddFolder}
         />
       </header>

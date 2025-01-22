@@ -4,18 +4,11 @@ import Folders from "@/ui/note/Folders";
 import Button from "@/ui/components/Button";
 import List from "@/ui/components/List";
 import cn from "@/utility/cn";
-import {
-  // ArchiveBoxIcon,
-  DocumentTextIcon,
-  PencilIcon,
-  PlusIcon,
-  // TrashIcon,
-} from "@heroicons/react/24/outline";
+import { PencilIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/outline";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useNoteContext } from "@/context/NoteContext";
-import UseIsTablet from "@/utility/UseTablet";
 import { useFolderContext } from "@/context/FolderContext";
 import ThemeSwitch from "../components/ThemeSwitch";
 
@@ -33,10 +26,8 @@ export default function Nav({
   setActiveLayout,
 }: NavProps) {
   const router = useRouter();
-  const pathname = usePathname();
   const { notes, setNotes } = useNoteContext();
   const { folders, setFolders } = useFolderContext();
-  const isTablet = UseIsTablet();
   const createdAt = new Date().toISOString();
 
   const handleAddPage = () => {
@@ -73,37 +64,7 @@ export default function Nav({
           <span className="ml-1">New Note</span>
         </Button>
       </header>
-      {/* pages */}
-      <nav className="my-6">
-        <p className="dark:text-white dark:text-opacity-60 text-sm pl-5 mb-2">
-          Recents
-        </p>
-        <ul>
-          {notes?.slice(0, 5).map((note) => (
-            <List
-              key={note.id}
-              onClick={() => {
-                router.push(`/note/${note.id}`);
-                if (isTablet) {
-                  setActiveLayout(0);
-                }
-              }}
-              className={
-                pathname === `/note/${note.id}`
-                  ? "bg-[#FF9500]"
-                  : " hover:bg-white hover:bg-opacity-5"
-              }
-            >
-              <span>
-                <DocumentTextIcon className="size-6 dark:text-white inline-block" />
-                <span className="text-sm ml-2 dark:text-white">
-                  {note.title}
-                </span>
-              </span>
-            </List>
-          ))}
-        </ul>
-      </nav>
+
       {/* folders */}
       <Folders
         activeFolder={activeFolder}
@@ -127,8 +88,8 @@ export default function Nav({
                 }}
                 className={
                   folder.id === activeFolder
-                    ? "bg-white bg-opacity-5"
-                    : " hover:bg-white hover:bg-opacity-5"
+                    ? "bg-black bg-opacity-5 dark:bg-white dark:bg-opacity-5"
+                    : "hover:bg-black hover:bg-opacity-5 dark:hover:bg-white dark:hover:bg-opacity-5 "
                 }
                 key={key}
               >
