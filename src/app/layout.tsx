@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { sourcesSans3 } from "@/ui/fonts";
-import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "Noted",
@@ -22,11 +21,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body>
-        <ThemeProvider attribute={"class"} defaultTheme="system" enableSystem>
-          {children}
-        </ThemeProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

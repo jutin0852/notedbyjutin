@@ -1,6 +1,5 @@
-"use client";
-import Link from "next/link";
+import Home from "./HomePage";
 
-export default function Home() {
-  return <Link href={"/note"}>Notes</Link>;
+export default function page() {
+  return <Home />;
 }
