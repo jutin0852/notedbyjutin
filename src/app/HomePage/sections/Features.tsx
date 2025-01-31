@@ -59,29 +59,35 @@ export default function Features() {
               </p>
             </article>
           </section>
-          <section className=" mx-auto sm:ml-auto sm:my-auto">
+          <section className=" my-16 pl-12 mr-auto sm:ml-auto sm:my-auto">
             <div className="mb-8 ">
-              <h1 className="text-5xl text-[64px] text-notesOrange ">
+              <h1 className="text-5xl sm:text-[64px]  text-notesOrange ">
                 Write Notes
               </h1>
-              <p className="text-2xl">Write any note you want</p>
+              <p className="text-xl sm:text-2xl mt-4">
+                Write any note you want
+              </p>
             </div>
             <Button2 variant="secondary">Try Now</Button2>
           </section>
         </section>
 
         {/* second */}
-        <section className="relative my-[160px] flex flex-wrap">
+        <section className="relative sm:my-[160px] flex flex-wrap">
           <Arrow1 />
-          <section className="mr-auto my-auto">
+          <section className="mx-auto my-16 sm:mr-auto sm:my-auto">
             <div className="mb-8">
-              <h1 className="text-[64px] text-notesOrange ">Plan your day</h1>
-              <p className="text-2xl">Make sure your day is well planned</p>
+              <h1 className="text-5xl sm:text-[64px]  text-notesOrange ">
+                Plan your day
+              </h1>
+              <p className="text-xl sm:text-2xl mt-4">
+                Make sure your day is well planned
+              </p>
             </div>
             <Button2 variant="secondary">Try Now</Button2>
           </section>
 
-          <div className="w-1/2 relative flex  flex-col space-y-6">
+          <div className="w-full sm:w-1/2 relative flex  flex-col space-y-6">
             <Calender />
             <div className="bg-white w-full p-10 rounded-3xl flex justify-between border-2 border-black">
               <div>
@@ -91,7 +97,7 @@ export default function Features() {
               <StarOctogram />
             </div>
             <div className="flex justify-between w-full">
-              <ul className="rounded-3xl bg-white p-10 border-2 border-black  space-y-5">
+              <ul className="w-full rounded-3xl bg-white p-10 border-2 border-black  space-y-5">
                 {todo.map((todo, i) => (
                   <li key={i} className=" flex items-center space-x-3 ">
                     <div className="w-5 h-5 rounded-full border-2 border-[#F7BEF1]"></div>
