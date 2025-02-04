@@ -46,7 +46,7 @@ export default function Nav({
 
   return (
     <section
-      className={cn(" hidden w-full md:w-1/3 lg:block lg:w-[21%]  ", {
+      className={cn("overflow-y-auto h-screen hidden w-full md:w-1/3 lg:block lg:w-[21%]  ", {
         block: activeLayout == 1,
       })}
     >

@@ -35,7 +35,7 @@ NoteList) {
   return (
     <section
       className={cn(
-        "py-5  bg-[#EFEFEF] dark:text-white  px-5 dark:bg-[#1C1C1C] hidden w-full md:w-1/3 lg:w-[22%] lg:block h-screen",
+        "py-5 overflow-y-auto  bg-[#EFEFEF] dark:text-white  px-5 dark:bg-[#1C1C1C] hidden w-full md:w-1/3 lg:w-[22%] lg:block h-screen",
         { block: activeLayout === 2 }
       )}
     >

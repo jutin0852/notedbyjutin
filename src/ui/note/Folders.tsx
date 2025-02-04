@@ -94,7 +94,7 @@ export default function Folders({
   // };
 
   return (
-    <nav className="my-6">
+    <nav className="my-6 ">
       <header className="flex justify-between">
         <p className="dark:text-white dark:text-opacity-60 text-sm pl-5 mb-2">
           Folders

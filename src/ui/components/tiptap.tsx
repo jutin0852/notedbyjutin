@@ -34,7 +34,7 @@ const Tiptap = ({ note }: { note: Note | undefined }) => {
     editorProps: {
       attributes: {
         class:
-          "py-3 mx-auto h-[50vh] focus:outline-none list-inside list-disc break-words text-black dark:text-white   ",
+          "py-3 mx-auto overflow-y-auto h-[50vh] focus:outline-none list-inside list-disc break-words text-black dark:text-white   ",
       },
     },
     content: note?.body,

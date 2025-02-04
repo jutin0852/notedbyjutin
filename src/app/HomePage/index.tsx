@@ -5,7 +5,7 @@ import Features from "./sections/Features";
 
 export default function Home() {
   return (
-    <div className="">
+    <div >
       <Header />
       <Hero />
       <Features />

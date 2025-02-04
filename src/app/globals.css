@@ -22,7 +22,7 @@ ol {
     --foreground: #ededed;
   }
 } */
- /* * {
+/* * {
     outline: 1px solid red;
 } */
 
@@ -53,4 +53,22 @@ body {
 }
 .tiptap ul[data-type="taskList"] li label {
   @apply relative top-0.5;
+}
+
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the track */
+  /* border-radius: 10px; */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar on hover */
 }

@@ -32,7 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           />
           <section
             className={cn(
-              "w-full flex-col text-white p-8 lg:p-12 hidden md:w-2/3 lg:w-[55%] md:flex md:flex-grow ]",
+              "w-full h-screen flex-col text-white p-8 lg:p-12 hidden md:w-2/3 lg:w-[55%] md:flex md:flex-grow ]",
               { flex: activeLayout !== 1 && activeLayout !== 2 }
             )}
           >
