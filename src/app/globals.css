@@ -22,6 +22,9 @@ ol {
     --foreground: #ededed;
   }
 } */
+ /* * {
+    outline: 1px solid red;
+} */
 
 body {
   /* color: var(--foreground); */

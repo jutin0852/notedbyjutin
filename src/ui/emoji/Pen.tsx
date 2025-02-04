@@ -8,7 +8,7 @@ export default function Pen() {
       viewBox="0 0 120 120"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute -right-10 -top-10"
+      className="absolute size-20 -right-3 -top-10 sm:size-32 sm:-right-10 "
     >
       <path
         opacity="0.15"

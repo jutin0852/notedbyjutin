@@ -11,10 +11,10 @@ import React from "react";
 export default function Features() {
   return (
     <div className="bg-[#F9F6F2] py-14 lg:py-[150px]  text-black  ">
-      <div className="md:max-w-[1000px] px-5 md:m-auto">
+      <div className="md:max-w-[1000px] px-5 md:m-auto space-y-10 lg:space-y-20 ">
         {/* first */}
         <section className="w-full flex flex-wrap justify-between">
-          <section className="w-full sm:w-1/2  bg-white rounded-3xl p-5 md:p-10 border-2 border-black flex flex-col gap-10 relative">
+          <section className="w-full sm:w-3/4 mx-auto lg:w-1/2   bg-white rounded-3xl p-5 md:p-10 border-2 border-black flex flex-col gap-10 relative">
             <Pen />
             <article>
               <h3 className="font-semibold  text-xl md:text-3xl mb-2">
@@ -59,7 +59,7 @@ export default function Features() {
               </p>
             </article>
           </section>
-          <section className=" my-16 pl-12 mr-auto sm:ml-auto sm:my-auto">
+          <section className=" mt-16 mx-auto lg:ml-auto lg:my-auto">
             <div className="mb-8 ">
               <h1 className="text-5xl sm:text-[64px]  text-notesOrange ">
                 Write Notes
@@ -73,9 +73,9 @@ export default function Features() {
         </section>
 
         {/* second */}
-        <section className="relative sm:my-[160px] flex flex-wrap">
+        <section className="relative  flex flex-wrap">
           <Arrow1 />
-          <section className="mx-auto my-16 sm:mr-auto sm:my-auto">
+          <section className="mx-auto mb-16 lg:mx-auto lg:mr-auto lg:my-auto">
             <div className="mb-8">
               <h1 className="text-5xl sm:text-[64px]  text-notesOrange ">
                 Plan your day
@@ -87,7 +87,7 @@ export default function Features() {
             <Button2 variant="secondary">Try Now</Button2>
           </section>
 
-          <div className="w-full sm:w-1/2 relative flex  flex-col space-y-6">
+          <div className="w-full sm:w-3/4 mx-auto  lg:w-1/2 relative flex flex-col space-y-6">
             <Calender />
             <div className="bg-white w-full p-10 rounded-3xl flex justify-between border-2 border-black">
               <div>
@@ -96,8 +96,8 @@ export default function Features() {
               </div>
               <StarOctogram />
             </div>
-            <div className="flex justify-between w-full">
-              <ul className="w-full rounded-3xl bg-white p-10 border-2 border-black  space-y-5">
+            <div className="flex space-x-5 w-full">
+              <ul className="w-full   rounded-3xl bg-white p-10 border-2 border-black  space-y-5">
                 {todo.map((todo, i) => (
                   <li key={i} className=" flex items-center space-x-3 ">
                     <div className="w-5 h-5 rounded-full border-2 border-[#F7BEF1]"></div>
@@ -105,7 +105,7 @@ export default function Features() {
                   </li>
                 ))}
               </ul>
-              <ul className="hidden sm:block rounded-3xl bg-white p-10 border-2 border-black space-y-5">
+              <ul className="hidden md:block md:w-full rounded-3xl bg-white p-10 border-2 border-black space-y-5">
                 {todo.map((todo, i) => (
                   <li key={i} className=" flex items-center space-x-3">
                     <div className="w-5 h-5 rounded-full border-2 border-[#F7BEF1]"></div>
@@ -117,7 +117,7 @@ export default function Features() {
           </div>
         </section>
 
-        <section className="text-center flex flex-col items-center ">
+        <section className="text-center mt-14 flex flex-col items-center ">
           <Coding />
           <p className="text-[50px] max-w-[726px] my-10 leading-[60px] text-black">
             Ready to take your

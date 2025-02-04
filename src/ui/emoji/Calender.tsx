@@ -8,7 +8,7 @@ export default function Calender() {
       viewBox="0 0 135 135"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className='absolute -top-14 -left-16'
+      className='absolute -top-5 left-0 size-20 sm:size-32 sm:-top-14 sm:-left-16 '
     >
       <path
         opacity="0.15"

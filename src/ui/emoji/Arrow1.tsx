@@ -8,7 +8,7 @@ export default function Arrow1() {
       viewBox="0 0 246 203"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className='absolute -top-32 left-56 hidden md:block'
+      className='absolute -top-32 left-56 hidden lg:block'
     >
       <path
         d="M2 0C2 144 54.8 201 246 201"
