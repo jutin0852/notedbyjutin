@@ -111,7 +111,7 @@ export default function Folders({
             return (
               <div
                 key={key}
-                className="w-full px-5 py-2 flex justify-between my-2  dark:bg-white bg-opacity-5"
+                className="w-full px-5 py-2 flex justify-between my-2 bg-white  dark:bg-black dark:bg-opacity-5 bg-opacity-5"
               >
                 <span>
                   <FolderIcon className="dark:text-white  inline-block size-6" />

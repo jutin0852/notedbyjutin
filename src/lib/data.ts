@@ -1,8 +1,7 @@
 import { Folder, Note } from "./definitions";
 
 export const initialFolders: Folder[] = [
-  { title: "personal", id: "4" },
-  { title: "friends", id: "5" },
+ 
   {
     title: "All notes",
     id: "allnotes",
@@ -12,32 +11,11 @@ export const initialFolders: Folder[] = [
 export const InitialNotes: Note[] = [
   {
     id: "1",
-    title: "whats my life",
-    body: "my life is good",
-    folderId: ["4", "allnotes"],
+    title: "note",
+    body: "note",
+    folderId: [ "allnotes"],
     created_at: "2025-01-07",
-  },
-  {
-    id: "2",
-    title: "chinwe",
-    body: "my life is good",
-    folderId: ["5", "allnotes"],
-    created_at: "2025-01-07",
-  },
-
-  {
-    id: "9",
-    title: "is it good",
-    body: "good is goood yess",
-    folderId: ["4", "allnotes"],
-    created_at: "2025-01-07",
-  },
-  {
-    id: "6",
-    title: "olise",
-    body: "good is goood yessccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-    folderId: ["5", "allnotes"],
-    created_at: "2025-01-07",
-  },
+  }
+  
 ];
 
