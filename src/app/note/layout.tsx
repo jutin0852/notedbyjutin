@@ -11,7 +11,7 @@ import { ThemeProvider } from "next-themes";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [activeFolderID, setActiveFolderID] = useState<string>("allnotes");
-  const [activeLayout, setActiveLayout] = useState<number>(3);
+  const [activeLayout, setActiveLayout] = useState<number>(1);
 
   return (
     <Provider>
@@ -37,7 +37,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             )}
           >
             <p className="lg:hidden" onClick={() => setActiveLayout(2)}>
-              <ArrowLeftIcon className="size-6 text-white text-opacity-60 cursor-pointer md:hidden" />
+              <ArrowLeftIcon className="text-black size-5 mr-1 dark:text-white dark:text-opacity-60 cursor-pointer  lg:hidden inline" />
             </p>
             {children}
           </section>
