@@ -19,10 +19,10 @@ export default function Header() {
         <li className="self-center">About</li>
       </nav>
 
-      <div className="flex gap-4 text-black">
+      {/* <div className="flex gap-4 text-black">
         <Button2 variant="secondary" className="">Sign up</Button2>
         <Button2 variant="primary">Login</Button2>
-      </div>
+      </div> */}
     </header>
   );
 }
