@@ -1,4 +1,4 @@
-import Button2 from "@/ui/components/Button2";
+// import Button2 from "@/ui/components/Button2";
 import { PencilIcon } from "@heroicons/react/24/solid";
 import React from "react";
 
