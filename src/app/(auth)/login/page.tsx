@@ -7,7 +7,8 @@ import axios from "axios";
 import { loginUser } from "@/services/auth";
 import { loginSchema } from "@/schemas/auth.schema";
 import { LoginFields } from "@/types/authtype";
-
+import useAuth from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const {
@@ -22,12 +23,19 @@ export default function Page() {
     },
     resolver: zodResolver(loginSchema),
   });
+  const { setAuth } = useAuth();
+  const router = useRouter();
 
   const submitForm: SubmitHandler<LoginFields> = async (data) => {
     try {
       const response = await loginUser(data);
+      const username = response?.data.username;
+      const accessToken = response?.data.accessToken;
 
-      console.log(response?.data);
+      setAuth({ username, accessToken });
+      if (accessToken) {
+        router.replace("/note");
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (!error.response) {
