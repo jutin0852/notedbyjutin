@@ -162,7 +162,7 @@ export default function Folders({
                   />
                   {/* checking if a folder is empty before deleting */}
                   {notes?.filter((note: Note) =>
-                    note.folderId.includes(folder.id)
+                    note.folderId?.includes(folder.id)
                   ).length === 0 && (
                     <TrashIcon
                       className="size-6 dark:text-white inline-block ml-1 "

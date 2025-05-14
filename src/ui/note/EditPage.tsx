@@ -17,7 +17,7 @@ export default function EditPage({ params }: EditPageProps) {
   const [editing, setEditing] = useState<boolean>(false);
   const { folders } = useFolderContext();
 
-  const note = notes.find((note: Note) => note.id.toString() === params) ?? {
+  const note = notes.find((note: Note) => note.id === params) ?? {
     id: "",
     title: "Not Found",
     created_at: "",

@@ -29,7 +29,7 @@ NoteList) {
 
   // filter notes for folder
   const filteredNote = notes?.filter((note) =>
-    note.folderId.includes(folder.id)
+    note.folderId?.includes(folder.id)
   );
   const isTablet = UseIsTablet();
   return (
